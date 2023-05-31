@@ -1,4 +1,4 @@
-# :package_description
+# A menu package for filament
 
 ## Introduction
 
