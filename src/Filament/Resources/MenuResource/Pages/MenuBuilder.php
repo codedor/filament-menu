@@ -2,21 +2,17 @@
 
 namespace Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 
+use Closure;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\Models\Menu;
-use Closure;
 use Codedor\LinkPicker\Forms\Components\LinkPickerInput;
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
-use Filament\Pages\Actions\CreateAction;
 use Illuminate\Support\Str;
-use SolutionForest\FilamentTree\Actions;
-use SolutionForest\FilamentTree\Concern;
 use SolutionForest\FilamentTree\Resources\Pages\TreePage as BasePage;
-use SolutionForest\FilamentTree\Support\Utils;
 
 class MenuBuilder extends BasePage
 {
@@ -59,7 +55,7 @@ class MenuBuilder extends BasePage
                                 ->label('Online'),
                         ]);
                     }),
-                ])
+                ]),
         ];
     }
 }
