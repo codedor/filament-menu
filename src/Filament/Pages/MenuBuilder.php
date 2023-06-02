@@ -104,11 +104,9 @@ class MenuBuilder extends Page
         $this->emitSelf('refresh');
     }
 
-    public function handleNewOrder(int $id, null|int $parentId)
+    public function handleNewOrder(string $statePath, array $items)
     {
-        MenuItem::find($id)->update([
-            'parent_id' => $parentId,
-        ]);
+        dd($statePath, $items);
     }
 
     protected function getFormSchema(): array

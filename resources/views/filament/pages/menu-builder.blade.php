@@ -1,37 +1,20 @@
 <x-filament::page>
     {{ $record->description }}
 
-    <div x-data="{
-        init () {
-            let nestedSortables = document.querySelectorAll('.nested-sort')
-            for (let i = 0; i < nestedSortables.length; i++) {
-                new Sortable(nestedSortables[i], {
-                    group: 'nested',
-                    animation: 0,
-                    fallbackOnBody: true,
-                    swapThreshold: 0.65,
-                    handle: '.nested-sort-handle',
-                    onEnd (e) {
-                        $wire.call('handleNewOrder',
-                            e.item.dataset.id,
-                            parseInt(e.to.dataset.id),
-                        )
-                    },
-                })
-            }
-        },
-        openEditModal (id) {
-            $wire.call('setEditingMenuItem', id)
-            $dispatch('open-modal', { id: 'filament-menu::edit-menu-item-modal' })
-        },
-        closeEditModal () {
-
-        },
-    }">
-        <x-nested-menu-items
-            :items="$record->items"
-            :max-depth="$record->depth"
-        />
+    <div
+        class="filament-menu"
+        x-data="menuSortableContainer({
+            statePath: 'data.items'
+        })"
+        data-menu-container
+    >
+        @foreach($record->items as $item)
+            <x-filament-menu::menu-item
+                :item="$item"
+                statePath="data.items"
+                :maxDepth="$record->depth"
+            />
+        @endforeach
     </div>
 
     <x-filament::button wire:click="createMenuItem">
@@ -92,4 +75,29 @@
             border-radius: 5px;
         }
     </style>
+
+    <script>
+        document.addEventListener('alpine:initializing', () => {
+            window.Alpine.data('menuSortableContainer', ({ statePath }) => ({
+                statePath,
+                sortable: null,
+                init() {
+                    this.sortable = new Sortable(this.$el, {
+                        group: 'nested',
+                        animation: 150,
+                        fallbackOnBody: true,
+                        swapThreshold: 0.50,
+                        draggable: '[data-sortable-item]',
+                        handle: '[data-sortable-handle]',
+                        onSort: () => {
+                            this.sorted()
+                        }
+                    })
+                },
+                sorted() {
+                    this.$wire.handleNewOrder(this.statePath, this.sortable.toArray())
+                }
+            }))
+        })
+    </script>
 </x-filament::page>
