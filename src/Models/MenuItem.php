@@ -3,7 +3,6 @@
 namespace Codedor\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Navigation\Navigation;
 use Spatie\Translatable\HasTranslations;
 
 class MenuItem extends Model
