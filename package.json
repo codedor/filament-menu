@@ -1,0 +1,15 @@
+{
+  "name": "filament-menu",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "purge": "filament-purge -i resources/dist/plugin.css -o resources/dist/plugin.css"
+  },
+  "dependencies": {
+    "@awcodes/filament-plugin-purge": "^1.1.0",
+    "laravel-vite-plugin": "^0.7.8",
+    "sortablejs": "^1.15.0",
+    "vite": "^4.3.9"
+  }
+}

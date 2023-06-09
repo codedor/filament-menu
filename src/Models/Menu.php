@@ -18,6 +18,6 @@ class Menu extends Model
     {
         return $this->hasMany(MenuItem::class)
             ->whereDoesntHave('parent')
-            ->orderBy('sort_order');
+            ->ordered();
     }
 }
