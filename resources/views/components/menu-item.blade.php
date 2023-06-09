@@ -25,13 +25,8 @@
                 @svg('heroicon-o-dots-vertical', 'text-gray-400 w-4 h-4')
             </button>
 
-            <button
-                type="button"
-                wire:click="editItem('{{ $statePath }}')"
-                class="appearance-none px-3 py-2 text-left"
-            >
-                <span>{{ $item->working_title }}</span>
-            </button>
+
+            <span>{{ $item->working_title }}</span>
 
             @if(count($item->children) > 0)
                 <button type="button" x-on:click="open = !open" title="Toggle children" class="appearance-none text-gray-500">
@@ -48,17 +43,6 @@
         ])>
             <button
                 x-init
-                x-tooltip.raw.duration.0="{{__('filament-navigation::filament-navigation.items.add-child')}}"
-                type="button"
-                wire:click="addChild('{{ $statePath }}')"
-                class="p-1"
-                title="{{__('filament-navigation::filament-navigation.items.add-child')}}"
-            >
-                <x-heroicon-o-plus class="w-3 h-3 text-gray-500 hover:text-gray-900" />
-            </button>
-
-            <button
-                x-init
                 x-tooltip.raw.duration.0="{{__('filament-navigation::filament-navigation.items.remove')}}"
                 type="button"
                 wire:click="removeItem('{{ $statePath }}')"
@@ -66,6 +50,10 @@
                 title="{{__('filament-navigation::filament-navigation.items.remove')}}"
             >
                 <x-heroicon-o-trash class="w-3 h-3 text-danger-500 hover:text-danger-900" />
+            </button>
+
+            <button x-on:click="openEditModal({{ $item->id }})">
+                Edit
             </button>
         </div>
     </div>

@@ -6,7 +6,7 @@ use Codedor\FilamentMenu\Facades\MenuCollection;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class MenuRender extends Component
+class MenuBreadcrumbs extends Component
 {
     public function __construct(public string $identifier)
     {
@@ -15,8 +15,8 @@ class MenuRender extends Component
 
     public function render(): View
     {
-        return view('filament-menu::components.render', [
-            'navigation' => MenuCollection::getTree($this->identifier),
+        return view('filament-menu::components.breadcrumbs', [
+            'breadcrumbs' => MenuCollection::getBreadcrumbs($this->identifier),
         ]);
     }
 }
