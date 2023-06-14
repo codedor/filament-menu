@@ -27,7 +27,7 @@ class MenuBuilder extends Page
 
     protected static string $resource = MenuResource::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static string $view = 'filament-menu::filament.pages.menu-builder';
 
