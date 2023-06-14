@@ -15,7 +15,7 @@ class MenuBreadcrumbs extends Component
 
     public function render(): View
     {
-        return view('filament-menu::components.breadcrumbs', [
+        return view('filament-menu::components.render.breadcrumbs', [
             'breadcrumbs' => MenuCollection::getBreadcrumbs($this->identifier),
         ]);
     }

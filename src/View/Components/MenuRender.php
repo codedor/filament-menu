@@ -15,7 +15,7 @@ class MenuRender extends Component
 
     public function render(): View
     {
-        return view('filament-menu::components.render', [
+        return view('filament-menu::components.render.root', [
             'navigation' => MenuCollection::getTree($this->identifier),
         ]);
     }
