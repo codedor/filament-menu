@@ -10,10 +10,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "illuminate/contracts": "^10.0",
-        "spatie/laravel-package-tools": "^1.12",
         "codedor/filament-link-picker": "dev-master",
-        "codedor/filament-translatable-tabs": "dev-master"
+        "codedor/filament-translatable-tabs": "dev-master",
+        "illuminate/contracts": "^10.0",
+        "spatie/eloquent-sortable": "^4.0",
+        "spatie/laravel-package-tools": "^1.12"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -53,5 +54,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://codedor.repo.repman.codedor.online"
+        }
+    ]
 }

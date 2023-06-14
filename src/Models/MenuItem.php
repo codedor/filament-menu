@@ -3,11 +3,13 @@
 namespace Codedor\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 
 class MenuItem extends Model
 {
     use HasTranslations;
+    use SortableTrait;
 
     protected $fillable = [
         'menu_id',
@@ -18,6 +20,11 @@ class MenuItem extends Model
         'label',
         'translated_link',
         'online',
+    ];
+
+    public $sortable = [
+        'order_column_name' => 'sort_order',
+        'sort_when_creating' => true,
     ];
 
     protected $translatable = [

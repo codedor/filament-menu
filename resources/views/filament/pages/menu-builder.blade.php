@@ -1,37 +1,20 @@
 <x-filament::page>
     {{ $record->description }}
 
-    <div x-data="{
-        init () {
-            let nestedSortables = document.querySelectorAll('.nested-sort')
-            for (let i = 0; i < nestedSortables.length; i++) {
-                new Sortable(nestedSortables[i], {
-                    group: 'nested',
-                    animation: 0,
-                    fallbackOnBody: true,
-                    swapThreshold: 0.65,
-                    handle: '.nested-sort-handle',
-                    onEnd (e) {
-                        $wire.call('handleNewOrder',
-                            e.item.dataset.id,
-                            parseInt(e.to.dataset.id),
-                        )
-                    },
-                })
-            }
-        },
-        openEditModal (id) {
-            $wire.call('setEditingMenuItem', id)
-            $dispatch('open-modal', { id: 'filament-menu::edit-menu-item-modal' })
-        },
-        closeEditModal () {
-
-        },
-    }">
-        <x-nested-menu-items
-            :items="$record->items"
-            :max-depth="$record->depth"
-        />
+    <div
+        class="filament-menu"
+        x-data="menuSortableContainer({
+            statePath: 'data.items'
+        })"
+        data-menu-container
+    >
+        @foreach($record->items as $item)
+            <x-filament-menu::menu-item
+                :item="$item"
+                statePath="data.items.{{ $item->id }}"
+                :maxDepth="$record->depth"
+            />
+        @endforeach
     </div>
 
     <x-filament::button wire:click="createMenuItem">
@@ -81,15 +64,4 @@
             </div>
         @endif
     </x-filament::modal>
-
-    <style>
-        .nested-sort-placeholder .nested-sort-placeholder:after {
-            content: ' ';
-            display: block;
-            margin: 10px 0 10px 3rem;
-            min-height: 2rem;
-            background-color: rgba(0, 0, 0, .05);
-            border-radius: 5px;
-        }
-    </style>
 </x-filament::page>

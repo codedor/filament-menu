@@ -14,6 +14,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\Concerns;
+use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
 {
@@ -101,14 +102,20 @@ class MenuBuilder extends Page
             'id' => 'filament-menu::edit-menu-item-modal',
         ]);
 
-        $this->emitSelf('refresh');
     }
 
-    public function handleNewOrder(int $id, null|int $parentId)
+    public function handleNewOrder(string $statePath, array $items)
     {
-        MenuItem::find($id)->update([
-            'parent_id' => $parentId,
-        ]);
+        $itemIds = collect($items)->map(fn ($item) => Str::afterLast($item, '.'));
+
+        MenuItem::whereIn('id', $itemIds)
+            ->update([
+                'parent_id' => ($statePath === 'data.items') ? null : Str::afterLast($statePath, '.'),
+            ]);
+
+        MenuItem::setNewOrder($itemIds);
+
+        $this->record->refresh();
     }
 
     protected function getFormSchema(): array
