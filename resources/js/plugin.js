@@ -19,6 +19,10 @@ document.addEventListener('alpine:initializing', () => {
     },
     sorted() {
       this.$wire.handleNewOrder(this.statePath, this.sortable.toArray())
-    }
+    },
+    openEditModal (id) {
+      this.$wire.call('setEditingMenuItem', id)
+      this.$dispatch('open-modal', { id: 'filament-menu::edit-menu-item-modal' })
+    },
   }))
 })

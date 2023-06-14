@@ -61,7 +61,9 @@ class MenuBuilder extends Page
 
         $this->form->fill([
             'working_title' => $this->editingMenuItem->working_title,
-            'link' => json_decode($this->editingMenuItem->link ?? '[]', true),
+            'link' => is_string($this->editingMenuItem->link)
+                ? json_decode($this->editingMenuItem->link ?? '[]', true)
+                : $this->editingMenuItem->link,
             ...LocaleCollection::mapWithKeys(function (Locale $locale) {
                 $locale = $locale->locale();
 
@@ -98,10 +100,11 @@ class MenuBuilder extends Page
             ->success()
             ->send();
 
+        $this->record->refresh();
+
         $this->dispatchBrowserEvent('close-modal', [
             'id' => 'filament-menu::edit-menu-item-modal',
         ]);
-
     }
 
     public function handleNewOrder(string $statePath, array $items)

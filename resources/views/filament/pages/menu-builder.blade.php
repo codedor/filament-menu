@@ -23,7 +23,6 @@
 
     <x-filament::modal
         id="filament-menu::edit-menu-item-modal"
-        x-on:modal-closed="closeEditModal()"
         width="4xl"
     >
         @if ($editingMenuItem)

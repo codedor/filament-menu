@@ -6,7 +6,9 @@
 ])
 
 <div
-    x-data="{ open: $persist(true) }"
+    x-data="{
+        open: $persist(true),
+    }"
     wire:key="{{ $statePath }}"
     data-id="{{ $statePath }}"
     class="space-y-2"
