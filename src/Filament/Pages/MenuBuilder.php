@@ -4,21 +4,26 @@ namespace Codedor\FilamentMenu\Filament\Pages;
 
 use Closure;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
+use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
 use Codedor\LinkPicker\Forms\Components\LinkPickerInput;
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
+use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\Concerns;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
 {
     use Concerns\InteractsWithRecord;
+    use HasTranslations;
 
     protected static string $resource = MenuResource::class;
 
@@ -55,9 +60,9 @@ class MenuBuilder extends Page
         $this->record->refresh();
     }
 
-    public function setEditingMenuItem(int $id)
+    public function setEditingMenuItem(?int $id = null)
     {
-        $this->editingMenuItem = MenuItem::find($id);
+        $this->editingMenuItem = $id ? MenuItem::find($id) : new MenuItem();
 
         $this->form->fill([
             'working_title' => $this->editingMenuItem->working_title,
@@ -101,21 +106,21 @@ class MenuBuilder extends Page
     {
         $this->validate();
 
-        $translations = [];
-        LocaleCollection::each(function (Locale $locale) use (&$translations) {
-            foreach ($this->{$locale->locale()} as $key => $value) {
-                $translations[$key][$locale->locale()] = $value;
-            }
-        });
+        $data = $this->mutateFormDataBeforeSave($this->form->getState());
 
-        $this->editingMenuItem->update([
-            'working_title' => $this->working_title,
-            'link' => $this->link,
-            ...$translations,
-        ]);
+        if ($this->editingMenuItem->id) {
+            $this->editingMenuItem->update($data);
+
+            $title = __('filament-menu::menu-item.successfully updated');
+        } else {
+            $data['menu_id'] = $this->record->id;
+            $this->editingMenuItem->create($data);
+
+            $title = __('filament-menu::menu-item.successfully created');
+        }
 
         Notification::make()
-            ->title(__('filament-menu::edit-modal.successfully updated'))
+            ->title($title)
             ->success()
             ->send();
 
@@ -135,7 +140,12 @@ class MenuBuilder extends Page
                 'parent_id' => ($statePath === 'data.items') ? null : Str::afterLast($statePath, '.'),
             ]);
 
-        MenuItem::setNewOrder($itemIds);
+        MenuItem::setNewOrder($itemIds, 1000);
+
+        Notification::make()
+            ->title(__('filament-menu::menu-item.sorted'))
+            ->success()
+            ->send();
 
         $this->record->refresh();
     }
@@ -174,6 +184,17 @@ class MenuBuilder extends Page
 
     public static function getModel(): string
     {
-        return static::getResource()::getModel();
+        return MenuItem::class;
+    }
+
+    protected function resolveRecord($key): Model
+    {
+        $record = static::getResource()::resolveRecordRouteBinding($key);
+
+        if ($record === null) {
+            throw (new ModelNotFoundException())->setModel(Menu::class, [$key]);
+        }
+
+        return $record;
     }
 }

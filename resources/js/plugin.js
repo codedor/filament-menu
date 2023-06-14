@@ -22,6 +22,7 @@ document.addEventListener('alpine:initializing', () => {
     },
     openEditModal (id) {
       this.$wire.call('setEditingMenuItem', id)
+
       this.$dispatch('open-modal', { id: 'filament-menu::edit-menu-item-modal' })
     },
   }))

@@ -15,11 +15,12 @@
                 :maxDepth="$record->depth"
             />
         @endforeach
+
+        <x-filament::button x-on:click="openEditModal()">
+            {{ __('filament-menu.add menu item') }}
+        </x-filament::button>
     </div>
 
-    <x-filament::button wire:click="createMenuItem">
-        {{ __('filament-menu.add menu item') }}
-    </x-filament::button>
 
     <x-filament::modal
         id="filament-menu::edit-menu-item-modal"
@@ -28,9 +29,13 @@
         @if ($editingMenuItem)
             <x-slot name="header">
                 <x-filament::modal.heading>
-                    {{ __('filament-menu::edit-modal.editing :name', [
-                        'name' => $editingMenuItem->working_title,
-                    ]) }}
+                    @if($editingMenuItem->id)
+                        {{ __('filament-menu::edit-modal.editing :name', [
+                            'name' => $editingMenuItem->working_title,
+                        ]) }}
+                    @else
+                        {{ __('filament-menu::edit-modal.create new') }}
+                    @endif
                 </x-filament::modal.heading>
             </x-slot>
 
