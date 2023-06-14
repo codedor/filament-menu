@@ -78,6 +78,25 @@ class MenuBuilder extends Page
         ]);
     }
 
+    public function removeItem($id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+
+        MenuItem::where('parent_id', $menuItem->id)
+            ->update([
+                'parent_id' => null,
+            ]);
+
+        $menuItem->delete();
+
+        Notification::make()
+            ->title(__('filament-menu::menu-item.deleted'))
+            ->success()
+            ->send();
+
+        $this->record->refresh();
+    }
+
     public function submitEditForm()
     {
         $this->validate();

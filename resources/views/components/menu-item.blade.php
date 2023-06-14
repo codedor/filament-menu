@@ -47,7 +47,7 @@
                 x-init
                 x-tooltip.raw.duration.0="{{__('filament-navigation::filament-navigation.items.remove')}}"
                 type="button"
-                wire:click="removeItem('{{ $statePath }}')"
+                wire:click="removeItem('{{ $item->id }}')"
                 class="p-1"
                 title="{{__('filament-navigation::filament-navigation.items.remove')}}"
             >
