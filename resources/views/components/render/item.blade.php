@@ -1,5 +1,5 @@
 <li @class(['active' => $item['active']])>
-    <a href="{{ $item['url'] }}">
+    <a href="{!! $item['url'] !!}">
         <span>{{ $item['title'] }}</span>
     </a>
 

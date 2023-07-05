@@ -1,7 +1,7 @@
 <ul style="display: flex">
     @foreach ($breadcrumbs as $crumb)
         <li>
-            <a href="{{ $crumb['url'] }}">
+            <a href="{!! $crumb['url'] !!}">
                 <span>{{ $crumb['title'] }}</span>
             </a>
 
