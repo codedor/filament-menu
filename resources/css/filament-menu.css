@@ -1,6 +1,35 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.sortable-container-maybe-active {
+@layer components {
+  .menu-item {
+    margin-bottom: 8px;
+  }
 
+  .menu-item--buttons {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .menu-child-list {
+    position: relative;
+    margin-top: 0 !important;
+    padding-left: 41px;
+  }
+
+  .menu-child-list::after {
+    @apply bg-gray-200;
+
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18.5px;
+
+    width: 4px;
+    height: 100%;
+
+    border-radius: 2px;
+  }
 }
