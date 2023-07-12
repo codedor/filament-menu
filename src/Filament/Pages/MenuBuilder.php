@@ -60,7 +60,7 @@ class MenuBuilder extends Page
         $this->record->refresh();
     }
 
-    public function setEditingMenuItem(?int $id = null)
+    public function setEditingMenuItem(int $id = null)
     {
         $this->editingMenuItem = $id ? MenuItem::find($id) : new MenuItem();
 
