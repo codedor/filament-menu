@@ -3,6 +3,7 @@
 namespace Codedor\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 
@@ -58,7 +59,7 @@ class MenuItem extends Model
             ->orderBy('sort_order');
     }
 
-    public function getRouteAttribute(): string
+    public function getRouteAttribute(): HtmlString|string|null
     {
         if (! empty($this->translated_link)) {
             return lroute($this->translated_link) ?? '#';
