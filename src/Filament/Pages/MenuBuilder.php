@@ -2,7 +2,6 @@
 
 namespace Codedor\FilamentMenu\Filament\Pages;
 
-use Closure;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
@@ -80,7 +79,7 @@ class MenuBuilder extends Page
                         'label' => $this->editingMenuItem->label,
                         'translated_link' => $this->editingMenuItem->translated_link,
                         'online' => $this->editingMenuItem->online,
-                    ]
+                    ],
                 ];
             }),
         ]);

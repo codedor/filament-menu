@@ -8,9 +8,9 @@ use Codedor\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns;
+use Filament\Tables\Table;
 
 class MenuResource extends Resource
 {

@@ -10,6 +10,7 @@ use Filament\Panel;
 class MenuPlugin implements Plugin
 {
     protected bool $hasMenuResource = true;
+
     protected bool $hasMenuBuilderPage = true;
 
     public static function make(): static
