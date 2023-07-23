@@ -6,9 +6,9 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 use Codedor\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns;
 

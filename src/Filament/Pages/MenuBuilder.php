@@ -13,6 +13,7 @@ use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\Concerns;
@@ -74,11 +75,13 @@ class MenuBuilder extends Page
 
                 $this->editingMenuItem->setLocale($locale);
 
-                return [$locale => [
-                    'label' => $this->editingMenuItem->label,
-                    'translated_link' => $this->editingMenuItem->translated_link,
-                    'online' => $this->editingMenuItem->online,
-                ]];
+                return [
+                    $locale => [
+                        'label' => $this->editingMenuItem->label,
+                        'translated_link' => $this->editingMenuItem->translated_link,
+                        'online' => $this->editingMenuItem->online,
+                    ]
+                ];
             }),
         ]);
     }
@@ -165,7 +168,7 @@ class MenuBuilder extends Page
                 ->translatableFields([
                     TextInput::make('label')
                         ->label('Label')
-                        ->required(fn (Closure $get) => $get('online')),
+                        ->required(fn (Get $get) => $get('online')),
 
                     LinkPickerInput::make('translated_link')
                         ->label('Link')

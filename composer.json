@@ -10,8 +10,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codedor/filament-link-picker": "dev-master",
-        "codedor/filament-translatable-tabs": "dev-master",
+        "codedor/filament-link-picker": "dev-filament-v3",
+        "codedor/filament-translatable-tabs": "dev-filament-v3",
+        "filament/filament": "^3.0",
         "illuminate/contracts": "^10.0",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-navigation": "^1.2",

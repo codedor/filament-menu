@@ -8,26 +8,27 @@ use Codedor\FilamentMenu\View\Components;
 use Filament\PluginServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentMenuServiceProvider extends PluginServiceProvider
+class FilamentMenuServiceProvider extends PackageServiceProvider
 {
     protected const PACKAGE_NAME = 'filament-menu';
 
-    protected array $pages = [
-        MenuBuilder::class,
-    ];
+//    protected array $pages = [
+//        MenuBuilder::class,
+//    ];
+//
+//    protected array $resources = [
+//        MenuResource::class,
+//    ];
 
-    protected array $resources = [
-        MenuResource::class,
-    ];
-
-    protected array $styles = [
-        'filament-menu-styles' => __DIR__ . '/../../public/dist/assets/filament-menu.css',
-    ];
-
-    protected array $beforeCoreScripts = [
-        'filament-menu-scripts' => __DIR__ . '/../../public/dist/assets/plugin.js',
-    ];
+//    protected array $styles = [
+//        'filament-menu-styles' => __DIR__ . '/../../public/dist/assets/filament-menu.css',
+//    ];
+//
+//    protected array $beforeCoreScripts = [
+//        'filament-menu-scripts' => __DIR__ . '/../../public/dist/assets/plugin.js',
+//    ];
 
     public function configurePackage(Package $package): void
     {
@@ -43,7 +44,7 @@ class FilamentMenuServiceProvider extends PluginServiceProvider
             ->hasTranslations();
     }
 
-    public function bootingPackage()
+    public function bootingPackage(): void
     {
         Blade::component('filament-menu::render', Components\MenuRender::class);
         Blade::component('filament-menu::breadcrumbs', Components\MenuBreadcrumbs::class);
