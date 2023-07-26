@@ -2,8 +2,6 @@
 
 namespace Codedor\FilamentMenu\Providers;
 
-use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\View\Components;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;

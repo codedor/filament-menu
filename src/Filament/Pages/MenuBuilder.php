@@ -13,15 +13,12 @@ use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
-use Filament\Panel;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
@@ -37,8 +34,9 @@ class MenuBuilder extends Page
 
     public bool $isEditingMenuItem = false;
 
-    public string|null $editingMenuItemId = null;
-    public string|null $editingMenuItemWorkingTitle = null;
+    public ?string $editingMenuItemId = null;
+
+    public ?string $editingMenuItemWorkingTitle = null;
 
     protected $listeners = [
         'refresh' => '$refresh',
