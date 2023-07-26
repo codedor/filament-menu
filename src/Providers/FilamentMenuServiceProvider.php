@@ -13,14 +13,6 @@ class FilamentMenuServiceProvider extends PackageServiceProvider
 {
     protected const PACKAGE_NAME = 'filament-menu';
 
-    //    protected array $pages = [
-    //        MenuBuilder::class,
-    //    ];
-    //
-    //    protected array $resources = [
-    //        MenuResource::class,
-    //    ];
-
     //    protected array $styles = [
     //        'filament-menu-styles' => __DIR__ . '/../../public/dist/assets/filament-menu.css',
     //    ];

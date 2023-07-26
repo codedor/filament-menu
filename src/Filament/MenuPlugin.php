@@ -6,6 +6,9 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
 
 class MenuPlugin implements Plugin
 {
@@ -35,6 +38,11 @@ class MenuPlugin implements Plugin
             $panel->pages([
                 MenuBuilder::class,
             ]);
+
+            FilamentAsset::register([
+                Css::make('filament-menu-stylesheet', __DIR__ . '/../../public/dist/assets/filament-menu.css'),
+                Js::make('filament-menu-script', __DIR__ . '/../../public/dist/assets/plugin.js'),
+            ], 'filament-menu');
         }
     }
 

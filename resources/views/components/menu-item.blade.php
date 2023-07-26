@@ -24,8 +24,8 @@
                 'flex items-center bg-gray-50 rounded-l-lg border-r border-gray-300 p-2 cursor-grab focus:cursor-grabbing',
                 'dark:bg-gray-800 dark:border-gray-600' => config('filament.dark_mode'),
             ]) data-sortable-handle>
-                @svg('heroicon-o-dots-vertical', 'text-gray-400 w-4 h-4 -mr-2')
-                @svg('heroicon-o-dots-vertical', 'text-gray-400 w-4 h-4')
+                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-4 h-4 -mr-2')
+                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-4 h-4')
             </button>
 
             <span class="py-2 px-4">
@@ -55,36 +55,10 @@
             'menu-item--buttons absolute right-3 flex items-center',
             'dark:border-gray-600 dark:divide-gray-600' => config('filament.dark_mode'),
         ])>
-            <button
-                x-on:click="openEditModal({{ $item->id }})"
-                class="
-                    filament-link
-                    inline-flex items-center justify-center gap-0.5
-                    font-medium text-sm text-primary-600 hover:text-primary-500
-                    hover:underline focus:underline
-                    filament-tables-link-action mr-4
-                "
-            >
-                <x-heroicon-o-pencil class="filament-link-icon w-4 h-4 mr-1 rtl:ml-1" />
-                Edit
-            </button>
-            <button
-                x-init
-                x-tooltip.raw.duration.0="{{__('filament-navigation::filament-navigation.items.remove')}}"
-                type="button"
-                wire:click="removeItem('{{ $item->id }}')"
-                class="
-                    filament-link
-                    inline-flex items-center justify-center gap-0.5
-                    font-medium text-sm text-danger-600 hover:text-danger-500
-                    hover:underline focus:underline
-                    filament-tables-link-action
-                "
-                title="{{__('filament-navigation::filament-navigation.items.remove')}}"
-            >
-                <x-heroicon-o-trash class="filament-link-icon w-4 h-4 mr-1 rtl:ml-1" />
-                Delete
-            </button>
+            <x-filament-actions::actions :actions="[
+                ($this->editAction)(['menuItem' => $item->id]),
+                ($this->deleteAction)(['menuItem' => $item->id]),
+            ]" />
         </div>
     </div>
 
