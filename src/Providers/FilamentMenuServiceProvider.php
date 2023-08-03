@@ -11,14 +11,6 @@ class FilamentMenuServiceProvider extends PackageServiceProvider
 {
     protected const PACKAGE_NAME = 'filament-menu';
 
-    //    protected array $styles = [
-    //        'filament-menu-styles' => __DIR__ . '/../../public/dist/assets/filament-menu.css',
-    //    ];
-    //
-    //    protected array $beforeCoreScripts = [
-    //        'filament-menu-scripts' => __DIR__ . '/../../public/dist/assets/plugin.js',
-    //    ];
-
     public function configurePackage(Package $package): void
     {
         $package

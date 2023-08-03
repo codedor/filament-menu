@@ -4,6 +4,7 @@ namespace Codedor\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 class Menu extends Model
 {
@@ -19,5 +20,24 @@ class Menu extends Model
         return $this->hasMany(MenuItem::class)
             ->whereDoesntHave('parent')
             ->ordered();
+    }
+
+    public function hasItemsWithDepthIssues(): bool
+    {
+        return MenuItem::where('menu_id', $this->id)
+            ->with('parent')
+            ->get()
+            ->filter(function (MenuItem $item) {
+                $depth = 0;
+                $parent = $item->parent;
+
+                while ($parent) {
+                    $parent = $parent->parent;
+                    $depth++;
+                }
+
+                return $depth >= $this->depth;
+            })
+            ->isNotEmpty();
     }
 }
