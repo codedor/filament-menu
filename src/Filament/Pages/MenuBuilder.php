@@ -17,7 +17,6 @@ use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 
@@ -94,7 +93,7 @@ class MenuBuilder extends Page
 
                         LinkPickerInput::make('link'),
                     ])
-                    ->translatableFields(fn() => [
+                    ->translatableFields(fn () => [
                         TextInput::make('label')
                             ->label('Label')
                             ->required(fn (Get $get) => $get('online')),
