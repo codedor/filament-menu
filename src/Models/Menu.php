@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int $id
  * @property string $identifier
+ * @property int $depth
  */
 class Menu extends Model
 {

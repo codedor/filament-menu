@@ -15,6 +15,7 @@ use Spatie\Translatable\HasTranslations;
  * @property string|array $translated_link
  * @property string $label
  * @property int $parent_id
+ * @property int $menu_id
  * @property bool $online
  */
 class MenuItem extends Model
