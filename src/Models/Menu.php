@@ -24,4 +24,23 @@ class Menu extends Model
             ->whereDoesntHave('parent')
             ->ordered();
     }
+
+    public function hasItemsWithDepthIssues(): bool
+    {
+        return MenuItem::where('menu_id', $this->id)
+            ->with('parent')
+            ->get()
+            ->filter(function (MenuItem $item) {
+                $depth = 0;
+                $parent = $item->parent;
+
+                while ($parent) {
+                    $parent = $parent->parent;
+                    $depth++;
+                }
+
+                return $depth >= $this->depth;
+            })
+            ->isNotEmpty();
+    }
 }

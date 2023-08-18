@@ -13,15 +13,12 @@ use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
-use Filament\Panel;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
@@ -47,7 +44,7 @@ class MenuBuilder extends Page
     public function addAction(): Action
     {
         return $this->formAction()
-            ->label(__('filament-menu.add menu item'))
+            ->label(__('filament-menu::menu-builder.add menu item'))
             ->size('sm')
             ->button();
     }
@@ -56,7 +53,7 @@ class MenuBuilder extends Page
     {
         return $this->formAction()
             ->icon('heroicon-o-pencil')
-            ->label(__('filament-menu.edit menu item'))
+            ->label(__('filament-menu::menu-builder.edit menu item'))
             ->size('sm')
             ->link();
     }
@@ -121,8 +118,8 @@ class MenuBuilder extends Page
                 );
 
                 $title = $menuItem->wasRecentlyCreated
-                    ? __('filament-menu::menu-item.successfully created')
-                    : __('filament-menu::menu-item.successfully updated');
+                    ? __('filament-menu::menu-builder.successfully created')
+                    : __('filament-menu::menu-builder.successfully updated');
 
                 Notification::make()
                     ->title($title)
@@ -137,7 +134,7 @@ class MenuBuilder extends Page
     {
         return Action::make('delete')
             ->icon('heroicon-o-trash')
-            ->label(__('filament-menu.delete menu item'))
+            ->label(__('filament-menu::menu-builder.delete menu item'))
             ->size('sm')
             ->color('danger')
             ->link()
@@ -173,7 +170,7 @@ class MenuBuilder extends Page
         MenuItem::setNewOrder($itemIds, 1000);
 
         Notification::make()
-            ->title(__('filament-menu::menu-item.sorted'))
+            ->title(__('filament-menu::menu-builder.successfully sorted'))
             ->success()
             ->send();
 

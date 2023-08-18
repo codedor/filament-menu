@@ -55,7 +55,6 @@ class MenuResource extends Resource
                     ->icon('heroicon-o-document-text')
                     ->url(fn (Menu $record): string => "menus/{$record->id}/builder"),
 
-                // TODO: check if admin is allowed to create/edit/delete menus
                 Tables\Actions\EditAction::make(),
             ]);
     }

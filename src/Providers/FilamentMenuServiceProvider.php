@@ -2,8 +2,6 @@
 
 namespace Codedor\FilamentMenu\Providers;
 
-use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\View\Components;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
@@ -12,14 +10,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 class FilamentMenuServiceProvider extends PackageServiceProvider
 {
     protected const PACKAGE_NAME = 'filament-menu';
-
-    //    protected array $styles = [
-    //        'filament-menu-styles' => __DIR__ . '/../../public/dist/assets/filament-menu.css',
-    //    ];
-    //
-    //    protected array $beforeCoreScripts = [
-    //        'filament-menu-scripts' => __DIR__ . '/../../public/dist/assets/plugin.js',
-    //    ];
 
     public function configurePackage(Package $package): void
     {
