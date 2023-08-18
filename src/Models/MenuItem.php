@@ -3,10 +3,21 @@
 namespace Codedor\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\HtmlString;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @property string $working_title
+ * @property string|array $link
+ * @property string|array $translated_link
+ * @property string $label
+ * @property int $parent_id
+ * @property int $menu_id
+ * @property bool $online
+ */
 class MenuItem extends Model
 {
     use HasTranslations;
@@ -43,17 +54,17 @@ class MenuItem extends Model
         'online' => 'boolean',
     ];
 
-    public function menu()
+    public function menu(): BelongsTo
     {
         return $this->belongsTo(Menu::class);
     }
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(MenuItem::class);
     }
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(MenuItem::class, 'parent_id')
             ->orderBy('sort_order');

@@ -31,12 +31,12 @@ class MenuCollection extends Collection
 
     public function getTree(string $identifier): array
     {
-        return $this->getMenu($identifier)?->tree() ?? [];
+        return $this->getMenu($identifier)->tree();
     }
 
     public function getBreadcrumbs(string $identifier): array
     {
-        return $this->getMenu($identifier)?->breadcrumbs() ?? [];
+        return $this->getMenu($identifier)->breadcrumbs();
     }
 
     private function childrenCallback(MenuItem $item): callable

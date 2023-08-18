@@ -6,17 +6,17 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 use Codedor\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns;
+use Filament\Tables\Table;
 
 class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
     public static function form(Form $form): Form
     {
@@ -55,7 +55,6 @@ class MenuResource extends Resource
                     ->icon('heroicon-o-document-text')
                     ->url(fn (Menu $record): string => "menus/{$record->id}/builder"),
 
-                // TODO: check if admin is allowed to create/edit/delete menus
                 Tables\Actions\EditAction::make(),
             ]);
     }

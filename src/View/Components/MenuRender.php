@@ -8,14 +8,16 @@ use Illuminate\View\View;
 
 class MenuRender extends Component
 {
-    public function __construct(public string $identifier)
-    {
-
+    public function __construct(
+        public string $identifier,
+        public string $view = 'filament-menu::components.render.root',
+    ) {
+        //
     }
 
     public function render(): View
     {
-        return view('filament-menu::components.render.root', [
+        return view($this->view, [
             'navigation' => MenuCollection::getTree($this->identifier),
         ]);
     }
