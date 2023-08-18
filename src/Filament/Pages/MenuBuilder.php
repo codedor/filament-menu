@@ -35,11 +35,6 @@ class MenuBuilder extends Page
 
     protected static string $view = 'filament-menu::filament.pages.menu-builder';
 
-    public bool $isEditingMenuItem = false;
-
-    public string|null $editingMenuItemId = null;
-    public string|null $editingMenuItemWorkingTitle = null;
-
     protected $listeners = [
         'refresh' => '$refresh',
     ];
@@ -93,7 +88,7 @@ class MenuBuilder extends Page
                 ];
             })
             ->form([
-                TranslatableTabs::make('Translations')
+                TranslatableTabs::make()
                     ->columnSpan(['lg' => 2])
                     ->defaultFields([
                         TextInput::make('working_title')
@@ -102,7 +97,7 @@ class MenuBuilder extends Page
 
                         LinkPickerInput::make('link'),
                     ])
-                    ->translatableFields([
+                    ->translatableFields(fn() => [
                         TextInput::make('label')
                             ->label('Label')
                             ->required(fn (Get $get) => $get('online')),
@@ -195,7 +190,7 @@ class MenuBuilder extends Page
         return MenuItem::class;
     }
 
-    protected function resolveRecord($key): Model
+    protected function resolveRecord($key): Menu
     {
         $record = static::getResource()::resolveRecordRouteBinding($key);
 
