@@ -4,7 +4,6 @@ namespace Codedor\FilamentMenu\Http\Middleware;
 
 use Closure;
 use Codedor\FilamentMenu\Facades\MenuCollection;
-use Codedor\FilamentMenu\Models\Menu;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
