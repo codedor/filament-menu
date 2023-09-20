@@ -12,7 +12,7 @@ class MenuRender extends Component
         public string $identifier,
         public string $view = 'filament-menu::components.render.root',
     ) {
-        //
+        MenuCollection::fill();
     }
 
     public function render(): View

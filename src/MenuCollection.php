@@ -11,6 +11,19 @@ use Spatie\Navigation\Section;
 
 class MenuCollection extends Collection
 {
+    public function fill()
+    {
+        if ($this->isNotEmpty()) {
+            return $this;
+        }
+
+        Menu::get()->each(function (Menu $menu) {
+            $this->addMenu($menu);
+        });
+
+        return $this;
+    }
+
     public function addMenu(Menu $menu)
     {
         $navigation = $this->newEmptyNavigation();

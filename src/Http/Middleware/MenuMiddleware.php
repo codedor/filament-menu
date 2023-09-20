@@ -12,13 +12,7 @@ class MenuMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (MenuCollection::isNotEmpty()) {
-            return $next($request);
-        }
-
-        Menu::get()->each(function (Menu $menu) {
-            MenuCollection::addMenu($menu);
-        });
+        MenuCollection::fill();
 
         return $next($request);
     }
