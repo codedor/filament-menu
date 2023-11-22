@@ -72,10 +72,14 @@ class MenuItem extends Model
 
     public function getRouteAttribute(): HtmlString|string|null
     {
-        if (! empty($this->translated_link)) {
-            return lroute($this->translated_link) ?? '#';
-        }
+        try {
+            if (! empty($this->translated_link)) {
+                return lroute($this->translated_link) ?? '#';
+            }
 
-        return lroute($this->link) ?? '#';
+            return lroute($this->link) ?? '#';
+        } catch (\Throwable $e) {
+            return '#';
+        }
     }
 }
