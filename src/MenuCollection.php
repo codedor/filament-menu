@@ -29,7 +29,7 @@ class MenuCollection extends Collection
         $navigation = $this->newEmptyNavigation();
 
         $menu->items->each(function (MenuItem $item) use ($navigation) {
-            $navigation->add($item->label, $item->route, $this->childrenCallback($item));
+            $navigation->add($item->label ?? '', $item->route ?? '', $this->childrenCallback($item));
         });
 
         $this->put($menu->identifier, $navigation);
