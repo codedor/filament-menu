@@ -35,7 +35,8 @@ class MenuResource extends Resource
                     ->rows(3),
 
                 Components\TextInput::make('depth')
-                    ->default(0)
+                    ->default(1)
+                    ->minValue(1)
                     ->type('number')
                     ->required(),
             ]),
