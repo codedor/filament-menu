@@ -71,7 +71,6 @@
             </span>
         </div>
 
-
         <div @class([
             'menu-item--buttons absolute right-3 flex items-center',
             'dark:border-gray-600 dark:divide-gray-600' => config('filament.dark_mode'),

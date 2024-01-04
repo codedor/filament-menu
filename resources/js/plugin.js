@@ -1,5 +1,3 @@
-import Sortable from 'sortablejs'
-
 document.addEventListener('alpine:initializing', () => {
   window.Alpine.data('menuSortableContainer', ({ statePath }) => ({
     statePath,
@@ -19,11 +17,6 @@ document.addEventListener('alpine:initializing', () => {
     },
     sorted() {
       this.$wire.handleNewOrder(this.statePath, this.sortable.toArray())
-    },
-    openEditModal (id) {
-      this.$wire.call('setEditingMenuItem', id)
-
-      this.$dispatch('open-modal', { id: 'filament-menu::edit-menu-item-modal' })
     },
   }))
 })
