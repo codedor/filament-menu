@@ -20,15 +20,13 @@
         'opacity-50' => $depth >= $maxDepth,
     ])>
         <div @class([
-            'bg-white rounded-lg border border-gray-300 w-full flex menu-item',
-            'dark:bg-gray-700 dark:border-gray-600' => config('filament.dark_mode'),
+            'rounded-lg border border-gray-300 w-full flex menu-item dark:bg-zinc-800 dark:border-zinc-700',
         ])>
             <button type="button" @class([
-                'flex items-center bg-gray-50 rounded-l-lg border-r border-gray-300 p-2 cursor-grab focus:cursor-grabbing',
-                'dark:bg-gray-800 dark:border-gray-600' => config('filament.dark_mode'),
+                'flex items-center bg-gray-100 rounded-l-lg border-r border-gray-300 p-2 cursor-grab focus:cursor-grabbing dark:bg-white/10 dark:border-zinc-700',
             ]) data-sortable-handle>
-                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-4 h-4 -mr-2')
-                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-4 h-4')
+                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-5 h-5 -mr-3')
+                @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-5 h-5')
             </button>
 
             <span class="py-2 px-4">
