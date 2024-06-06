@@ -7,7 +7,6 @@ use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
 use Codedor\FilamentMenu\Types\GeneratedLinks;
 use Codedor\FilamentMenu\Types\LinkPickerLink;
-use Codedor\FilamentMenu\Types\MenuCTA;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;

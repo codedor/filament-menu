@@ -15,7 +15,7 @@ abstract class MenuItemType
 
     abstract public function schema(): array;
 
-    public function link(array $data): string | HtmlString
+    public function link(array $data): string|HtmlString
     {
         return '#';
     }
