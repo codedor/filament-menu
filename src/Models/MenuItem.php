@@ -2,13 +2,11 @@
 
 namespace Codedor\FilamentMenu\Models;
 
-use Codedor\OnlineScope\Models\Traits\HasOnlineScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\HtmlString;
 use Spatie\EloquentSortable\SortableTrait;
-use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $working_title
@@ -21,8 +19,6 @@ use Spatie\Translatable\HasTranslations;
  */
 class MenuItem extends Model
 {
-    use HasOnlineScope;
-    use HasTranslations;
     use SortableTrait;
 
     protected $fillable = [
@@ -30,10 +26,8 @@ class MenuItem extends Model
         'parent_id',
         'sort_order',
         'working_title',
-        'link',
-        'label',
-        'translated_link',
-        'online',
+        'type',
+        'data',
     ];
 
     public $sortable = [
@@ -41,19 +35,12 @@ class MenuItem extends Model
         'sort_when_creating' => true,
     ];
 
-    protected $translatable = [
-        'label',
-        'translated_link',
-        'online',
-    ];
-
     public $with = [
         'children',
     ];
 
-    public $casts = [
-        'link' => 'json',
-        'online' => 'boolean',
+    protected $casts = [
+        'data' => 'array',
     ];
 
     public function menu(): BelongsTo
@@ -70,18 +57,5 @@ class MenuItem extends Model
     {
         return $this->hasMany(MenuItem::class, 'parent_id')
             ->orderBy('sort_order');
-    }
-
-    public function getRouteAttribute(): HtmlString|string|null
-    {
-        try {
-            if (! empty($this->translated_link)) {
-                return lroute($this->translated_link) ?? '#';
-            }
-
-            return lroute($this->link) ?? '#';
-        } catch (\Throwable $e) {
-            return '#';
-        }
     }
 }

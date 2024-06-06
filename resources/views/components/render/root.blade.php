@@ -1,7 +1,9 @@
 <div>
     <ul>
         @foreach ($navigation as $item)
-            <x-filament-menu::render.item :$item />
+            @if (isset($item['attributes']['type']))
+                {{ (new $item['attributes']['type'])->render($item) }}
+            @endif
         @endforeach
     </ul>
 </div>
