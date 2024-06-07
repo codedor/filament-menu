@@ -11,10 +11,6 @@ abstract class NavigationElement
 {
     public static string $name;
 
-    public static null | string $identifier = null;
-
-    public static bool $isNormalLink = false;
-
     abstract public function render(array $data): ?View;
 
     abstract public function schema(): array;

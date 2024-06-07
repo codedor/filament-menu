@@ -4,8 +4,8 @@ namespace Codedor\FilamentMenu\NavigationElements;
 
 use Codedor\LinkPicker\Filament\LinkPickerInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
@@ -13,8 +13,6 @@ use Illuminate\View\View;
 class LinkPickerElement extends NavigationElement
 {
     public static string $name = 'Normal link';
-
-    public static bool $isNormalLink = true;
 
     public function render(array $data): ?View
     {
@@ -44,15 +42,12 @@ class LinkPickerElement extends NavigationElement
                 ])
                 ->translatableFields(fn () => [
                     TextInput::make('label')
-                        ->label('Label')
                         ->required(fn (Get $get) => $get('online')),
 
                     LinkPickerInput::make('translated_link')
-                        ->label('Link')
                         ->helperText('If you want to override the link for this translation, you can do so here.'),
 
-                    Toggle::make('online')
-                        ->label('Online'),
+                    Checkbox::make('online'), // TODO: Toggle doesn't work on create ?
                 ]),
         ];
     }

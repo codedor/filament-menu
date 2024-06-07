@@ -84,7 +84,7 @@ class MenuBuilder extends Page
                     ->schema(fn (Get $get) => $get('type') ? $get('type')::make()->schema() : []),
             ])
             ->action(function (array $arguments, array $data) {
-                $menuItem = MenuItem::updateOrCreate([
+                MenuItem::updateOrCreate([
                     'id' => $arguments['menuItem'] ?? null,
                     'menu_id' => $this->record->id,
                 ], [
@@ -93,11 +93,10 @@ class MenuBuilder extends Page
                     'data' => collect($data)->except('type', 'working_title'),
                 ]);
 
-                $title = $menuItem->wasRecentlyCreated
-                    ? __('filament-menu::menu-builder.successfully created')
-                    : __('filament-menu::menu-builder.successfully updated');
-
-                Notification::make()->title($title)->success()->send();
+                Notification::make()
+                    ->title(__('filament-menu::menu-builder.successfully updated'))
+                    ->success()
+                    ->send();
 
                 $this->record->refresh();
             });
