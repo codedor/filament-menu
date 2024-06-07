@@ -62,8 +62,8 @@ class MenuItem extends Model
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn (null | string $value) => config("filament-menu.navigation-elements.{$value}"),
-            set: fn (null | string $value) => array_search($value, config('filament-menu.navigation-elements')),
+            get: fn (?string $value) => config("filament-menu.navigation-elements.{$value}"),
+            set: fn (?string $value) => array_search($value, config('filament-menu.navigation-elements')),
         );
     }
 

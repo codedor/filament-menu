@@ -15,7 +15,7 @@ abstract class NavigationElement
 
     abstract public function schema(): array;
 
-    public function link(array $data): string | HtmlString
+    public function link(array $data): string|HtmlString
     {
         return '#';
     }
