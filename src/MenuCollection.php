@@ -43,16 +43,7 @@ class MenuCollection extends Collection
         $navigation = $this->newEmptyNavigation();
 
         $navigation->add(configure: function (Section $section) use ($menu) {
-            $menu->items->each(function (MenuItem $item) use ($section) {
-                $section->add(
-                    url: Str::before((new $item->type)->link($item->data) ?? '#', '"'),
-                    configure: $this->childrenCallback($item),
-                    attributes: [
-                        'type' => $item->type,
-                        'data' => $item->data,
-                    ],
-                );
-            });
+            $menu->items->each(fn (MenuItem $item) => $this->addToSection($section, $item));
         });
 
         $this->put($menu->identifier, $navigation);
@@ -63,15 +54,24 @@ class MenuCollection extends Collection
     private function childrenCallback(MenuItem $item): callable
     {
         return fn (Section $section) => $item->children->each(function (MenuItem $item) use ($section) {
-            $section->add(
-                url: Str::before((new $item->type)->link($item->data) ?? '#', '"'),
-                configure: $this->childrenCallback($item),
-                attributes: [
-                    'type' => $item->type,
-                    'data' => $item->data,
-                ],
-            );
+            $this->addToSection($section, $item);
         });
+    }
+
+    private function addToSection(Section $section, MenuItem $item): void
+    {
+        if (! (new $item->type)->shown($item->data)) {
+            return;
+        }
+
+        $section->add(
+            url: Str::before((new $item->type)->link($item->data) ?? '#', '"'),
+            configure: $this->childrenCallback($item),
+            attributes: [
+                'type' => $item->type,
+                'data' => $item->data,
+            ],
+        );
     }
 
     private function newEmptyNavigation()

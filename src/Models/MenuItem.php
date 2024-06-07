@@ -2,10 +2,10 @@
 
 namespace Codedor\FilamentMenu\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\HtmlString;
 use Spatie\EloquentSortable\SortableTrait;
 
 /**
@@ -57,5 +57,18 @@ class MenuItem extends Model
     {
         return $this->hasMany(MenuItem::class, 'parent_id')
             ->orderBy('sort_order');
+    }
+
+    public function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn (null | string $value) => config("filament-menu.navigation-elements.{$value}"),
+            set: fn (null | string $value) => array_search($value, config('filament-menu.navigation-elements')),
+        );
+    }
+
+    public function onlineValues(): array
+    {
+        return (new $this->type)->locales($this->data);
     }
 }

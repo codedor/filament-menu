@@ -37,11 +37,11 @@
                     @endif
                 </div>
 
-                {{-- <div>
-                    @foreach($item->getTranslations('online') as $locale => $online)
+                <div>
+                    @foreach($item->onlineValues() as $locale => $online)
                         <span
                             @style([
-                                match ($item->getTranslation('online', $locale)) {
+                                match ($online) {
                                     false, null, '' => \Filament\Support\get_color_css_variables('danger', shades: [500, 700]),
                                     default => \Filament\Support\get_color_css_variables('success', shades: [500, 700]),
                                 }
@@ -56,9 +56,9 @@
                             {{ $locale }}
                         </span>
                     @endforeach
-                </div> --}}
+                </div>
 
-                @if(count($item->children) > 0)
+                @if (count($item->children) > 0)
                     <button
                         type="button"
                         x-on:click="open = !open"

@@ -5,9 +5,6 @@ namespace Codedor\FilamentMenu\Filament\Pages;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
-use Codedor\FilamentMenu\Types\GeneratedLinks;
-use Codedor\FilamentMenu\Types\LinkPickerLink;
-use Codedor\FilamentMenu\Types\MenuCTA;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -57,6 +54,9 @@ class MenuBuilder extends Page
 
     public function formAction(): Action
     {
+        $types = collect(config('filament-menu.navigation-elements', []))
+            ->mapWithKeys(fn (string $element) => [$element => $element::name()]);
+
         return Action::make('edit')
             ->fillForm(function (array $arguments) {
                 $menuItem = isset($arguments['menuItem'])
@@ -69,36 +69,29 @@ class MenuBuilder extends Page
                     ...$menuItem->data ?? [],
                 ];
             })
-            ->form([
+            ->form(fn () => [
                 TextInput::make('working_title')
                     ->required()
                     ->maxLength(255),
 
                 Select::make('type')
+                    ->options($types)
                     ->required()
-                    ->reactive()
-                    ->options([
-                        // TODO: check list if count > 1
-                        LinkPickerLink::class => 'Link',
-                        GeneratedLinks::class => 'Generated Links',
-                    ]),
+                    ->reactive(),
 
                 Grid::make(1)
                     ->hidden(fn (Get $get) => empty($get('type')))
                     ->schema(fn (Get $get) => $get('type') ? $get('type')::make()->schema() : []),
             ])
             ->action(function (array $arguments, array $data) {
-                $menuItem = MenuItem::updateOrCreate(
-                    [
-                        'id' => $arguments['menuItem'] ?? null,
-                        'menu_id' => $this->record->id,
-                    ],
-                    [
-                        'working_title' => $data['working_title'],
-                        'type' => $data['type'],
-                        'data' => collect($data)->except('type', 'working_title'),
-                    ]
-                );
+                $menuItem = MenuItem::updateOrCreate([
+                    'id' => $arguments['menuItem'] ?? null,
+                    'menu_id' => $this->record->id,
+                ], [
+                    'working_title' => $data['working_title'],
+                    'type' => $data['type'],
+                    'data' => collect($data)->except('type', 'working_title'),
+                ]);
 
                 $title = $menuItem->wasRecentlyCreated
                     ? __('filament-menu::menu-builder.successfully created')

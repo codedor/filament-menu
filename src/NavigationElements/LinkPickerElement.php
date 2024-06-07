@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FilamentMenu\Types;
+namespace Codedor\FilamentMenu\NavigationElements;
 
 use Codedor\LinkPicker\Filament\LinkPickerInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -10,9 +10,9 @@ use Filament\Forms\Get;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
 
-class LinkPickerLink extends MenuItemType
+class LinkPickerElement extends NavigationElement
 {
-    public static string $name = 'Link Picker Link';
+    public static string $name = 'Normal link';
 
     public static bool $isNormalLink = true;
 
@@ -21,7 +21,7 @@ class LinkPickerLink extends MenuItemType
         $active = $data['active'] ?? false;
         $link = $data['attributes']['data'];
 
-        return view('filament-menu::components.types.link-picker-link', [
+        return view('filament-menu::components.navigation-elements.link-picker-element', [
             'active' => $active,
             'label' => $link[app()->getLocale()]['label'] ?? '',
             'link' => $this->link($link),
