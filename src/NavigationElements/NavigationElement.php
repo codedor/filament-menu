@@ -11,7 +11,7 @@ abstract class NavigationElement
 {
     public static string $name;
 
-    public static null | string $identifier = null;
+    public static ?string $identifier = null;
 
     public static bool $isNormalLink = false;
 
@@ -19,7 +19,7 @@ abstract class NavigationElement
 
     abstract public function schema(): array;
 
-    public function link(array $data): string | HtmlString
+    public function link(array $data): string|HtmlString
     {
         return '#';
     }
