@@ -29,7 +29,7 @@ class LinkPickerElement extends NavigationElement
 
     public function link(array $data): string|HtmlString
     {
-        return lroute($data[app()->getLocale()]['translated_link'] ?? $data['link'] ?? '');
+        return lroute($data[app()->getLocale()]['translated_link'] ?? $data['link'] ?? '') ?? '';
     }
 
     public function schema(): array
