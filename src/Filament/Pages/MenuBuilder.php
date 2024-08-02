@@ -61,7 +61,7 @@ class MenuBuilder extends Page
     {
         return Action::make('edit')
             ->fillForm(function (array $arguments, array $data) {
-                $menuItem = isset($arguments['menuItem']) ? MenuItem::find($arguments['menuItem']) : new MenuItem();
+                $menuItem = isset($arguments['menuItem']) ? MenuItem::find($arguments['menuItem']) : new MenuItem;
 
                 return [
                     'working_title' => $menuItem->working_title,
@@ -191,7 +191,7 @@ class MenuBuilder extends Page
         $record = static::getResource()::resolveRecordRouteBinding($key);
 
         if ($record === null) {
-            throw (new ModelNotFoundException())->setModel(Menu::class, [$key]);
+            throw (new ModelNotFoundException)->setModel(Menu::class, [$key]);
         }
 
         return $record;

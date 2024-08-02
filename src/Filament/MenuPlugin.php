@@ -46,9 +46,7 @@ class MenuPlugin implements Plugin
         }
     }
 
-    public function boot(Panel $panel): void
-    {
-    }
+    public function boot(Panel $panel): void {}
 
     public function menuResource(bool $condition = true): static
     {
