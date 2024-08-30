@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.2|^8.3",
         "codedor/filament-link-picker": "^1.0",
-        "codedor/filament-translatable-tabs": "^1.0",
+        "codedor/filament-translatable-tabs": "^1.2",
         "codedor/laravel-locale-collection": "^1.0",
         "codedor/laravel-online-scope": "^1.0",
         "filament/filament": "^3.1",

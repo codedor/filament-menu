@@ -18,6 +18,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
@@ -113,7 +114,7 @@ class MenuBuilder extends Page
                     [
                         'id' => $arguments['menuItem'] ?? null,
                     ],
-                    $this->mutateFormDataBeforeSave($data),
+                    $this->mutateData($data),
                 );
 
                 $title = $menuItem->wasRecentlyCreated
@@ -195,5 +196,21 @@ class MenuBuilder extends Page
         }
 
         return $record;
+    }
+
+    protected function mutateData(array $data): array
+    {
+        $model = app($this->getModel());
+        foreach (Arr::except($data, $model->getFillable()) as $locale => $values) {
+            if (! is_array($values)) {
+                continue;
+            }
+
+            foreach (Arr::only($values, $model->getTranslatableAttributes()) as $key => $value) {
+                $data[$key][$locale] = $value;
+            }
+        }
+
+        return $data;
     }
 }
