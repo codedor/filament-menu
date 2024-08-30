@@ -4,3 +4,7 @@ parameters:
 			message: "#^Cannot access property \\$id on Illuminate\\\\Database\\\\Eloquent\\\\Model\\|int\\|string\\.$#"
 			count: 1
 			path: src/Filament/Pages/MenuBuilder.php
+		-
+			message: "#^Function is_superadmin not found\\.$#"
+			count: 4
+			path: src/Filament/Resources/MenuResource.php
