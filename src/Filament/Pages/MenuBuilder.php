@@ -162,7 +162,7 @@ class MenuBuilder extends Page
         $record = static::getResource()::resolveRecordRouteBinding($key);
 
         if ($record === null) {
-            throw (new ModelNotFoundException())->setModel(Menu::class, [$key]);
+            throw (new ModelNotFoundException)->setModel(Menu::class, [$key]);
         }
 
         return $record;
