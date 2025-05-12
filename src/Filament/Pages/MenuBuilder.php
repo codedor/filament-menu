@@ -89,21 +89,24 @@ class MenuBuilder extends Page
                     ->columnSpan(['lg' => 2])
                     ->defaultFields([
                         TextInput::make('working_title')
+                            ->label(__('filament-menu::admin.working title'))
                             ->required()
                             ->maxLength(255),
 
-                        LinkPickerInput::make('link'),
+                        LinkPickerInput::make('link')
+                            ->label(__('filament-menu::admin.link')),
                     ])
                     ->translatableFields(fn () => [
                         TextInput::make('label')
-                            ->label('Label')
+                            ->label(__('filament-menu::admin.label'))
                             ->required(fn (Get $get) => $get('online')),
 
                         LinkPickerInput::make('translated_link')
-                            ->label('Link')
-                            ->helperText('If you want to override the link for this translation, you can do so here.'),
+                            ->label(__('filament-menu::admin.link'))
+                            ->helperText(__('filament-menu::admin.override translation link')),
 
                         Toggle::make('online')
+                            ->label(__('filament-menu::admin.online'))
                             ->label('Online'),
                     ]),
             ])
