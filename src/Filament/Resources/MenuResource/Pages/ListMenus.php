@@ -3,7 +3,6 @@
 namespace Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListMenus extends ListRecords

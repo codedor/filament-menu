@@ -6,9 +6,7 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 use Codedor\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns;
 use Filament\Tables\Table;
 
@@ -16,7 +14,7 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-bars-3';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-bars-3';
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
