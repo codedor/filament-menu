@@ -30,7 +30,7 @@ class MenuBuilder extends Page
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static string $view = 'filament-menu::filament.pages.menu-builder';
+    protected string $view = 'filament-menu::filament.pages.menu-builder';
 
     protected $listeners = [
         'refresh' => '$refresh',
@@ -84,7 +84,7 @@ class MenuBuilder extends Page
                     }),
                 ];
             })
-            ->form([
+            ->schema([
                 TranslatableTabs::make()
                     ->columnSpan(['lg' => 2])
                     ->defaultFields([
@@ -97,7 +97,7 @@ class MenuBuilder extends Page
                     ->translatableFields(fn () => [
                         TextInput::make('label')
                             ->label('Label')
-                            ->required(fn (Get $get) => $get('online')),
+                            ->required(fn (\Filament\Schemas\Components\Utilities\Get $get) => $get('online')),
 
                         LinkPickerInput::make('translated_link')
                             ->label('Link')

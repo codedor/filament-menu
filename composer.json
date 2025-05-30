@@ -10,11 +10,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codedor/filament-link-picker": "^1.6",
-        "codedor/filament-translatable-tabs": "^1.3",
+        "codedor/filament-link-picker": "dev-feature/filament-v4",
+        "codedor/filament-translatable-tabs": "dev-feature/filament-v4",
         "codedor/laravel-locale-collection": "^1.2",
-        "codedor/laravel-online-scope": "^1.2",
-        "filament/filament": "^3.1",
+        "codedor/laravel-online-scope": "dev-feature/filament-v4",
+        "filament/filament": "^4.0",
         "illuminate/contracts": "^10.0|^11.0|^12.0",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-navigation": "^1.2",
@@ -22,9 +22,10 @@
         "spatie/laravel-translatable": "^6.5"
     },
     "require-dev": {
+        "filament/upgrade": "^4.0",
+        "larastan/larastan": "^2.0|^3.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.0|^8.0",
-        "larastan/larastan": "^2.0|^3.0",
         "orchestra/testbench": "^8.0|^9.0|^10.0",
         "pestphp/pest": "^2.0|^3.0",
         "pestphp/pest-plugin-laravel": "^2.0|^3.0",
