@@ -6,7 +6,6 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 
