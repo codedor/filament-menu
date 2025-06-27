@@ -40,7 +40,6 @@ class MenuPlugin implements Plugin
             ]);
 
             FilamentAsset::register([
-                Css::make('filament-menu-stylesheet', __DIR__ . '/../../public/dist/assets/filament-menu.css'),
                 Js::make('filament-menu-script', __DIR__ . '/../../public/dist/assets/plugin.js'),
             ], 'filament-menu');
         }
