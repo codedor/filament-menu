@@ -53,7 +53,7 @@ return new class extends Migration
                 ->where('id', $menuItem->id)
                 ->update([
                     'type' => 'link-picker',
-                    'data' => json_encode($data)
+                    'data' => json_encode($data),
                 ]);
         }
 
