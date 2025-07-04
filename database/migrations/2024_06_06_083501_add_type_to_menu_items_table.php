@@ -21,10 +21,10 @@ return new class extends Migration
 
         // Migrate existing data to new structure
         $menuItems = DB::table('menu_items')->get();
-        
+
         foreach ($menuItems as $menuItem) {
             $data = [];
-            
+
             // Get link value (should be locale-independent)
             $link = json_decode($menuItem->link, true);
             if (is_array($link)) {
@@ -33,19 +33,19 @@ return new class extends Migration
             } else {
                 $data['link'] = $link;
             }
-            
+
             // Get locale data from existing columns
             $labels = json_decode($menuItem->label, true) ?: [];
             $translatedLinks = json_decode($menuItem->translated_link, true) ?: [];
             $onlineStatuses = json_decode($menuItem->online, true) ?: [];
-            
+
             // Build locale-specific data
             $locales = array_unique(array_merge(
                 array_keys($labels),
                 array_keys($translatedLinks),
                 array_keys($onlineStatuses)
             ));
-            
+
             foreach ($locales as $locale) {
                 $data[$locale] = [
                     'label' => $labels[$locale] ?? null,
@@ -53,7 +53,7 @@ return new class extends Migration
                     'translated_link' => $translatedLinks[$locale] ?? null,
                 ];
             }
-            
+
             // Update the menu item with new data structure
             DB::table('menu_items')
                 ->where('id', $menuItem->id)
