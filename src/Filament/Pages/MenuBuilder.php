@@ -14,6 +14,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class MenuBuilder extends Page
@@ -84,7 +85,7 @@ class MenuBuilder extends Page
                     ->schema(fn (Get $get) => $get('type') ? $get('type')::make()->schema() : []),
             ])
             ->action(function (array $arguments, array $data) {
-                MenuItem::updateOrCreate([
+                $menuItem = MenuItem::updateOrCreate([
                     'id' => $arguments['menuItem'] ?? null,
                     'menu_id' => $this->record->id,
                 ], [
@@ -93,8 +94,12 @@ class MenuBuilder extends Page
                     'data' => collect($data)->except('type', 'working_title'),
                 ]);
 
+                $title = $menuItem->wasRecentlyCreated
+                    ? __('filament-menu::menu-builder.successfully created')
+                    : __('filament-menu::menu-builder.successfully updated');
+
                 Notification::make()
-                    ->title(__('filament-menu::menu-builder.successfully updated'))
+                    ->title($title)
                     ->success()
                     ->send();
 
@@ -166,5 +171,21 @@ class MenuBuilder extends Page
         }
 
         return $record;
+    }
+
+    protected function mutateData(array $data): array
+    {
+        $model = app($this->getModel());
+        foreach (Arr::except($data, $model->getFillable()) as $locale => $values) {
+            if (! is_array($values)) {
+                continue;
+            }
+
+            foreach (Arr::only($values, $model->getTranslatableAttributes()) as $key => $value) {
+                $data[$key][$locale] = $value;
+            }
+        }
+
+        return $data;
     }
 }

@@ -76,6 +76,8 @@ class MenuCollection extends Collection
 
     private function newEmptyNavigation()
     {
-        return new Navigation(new ActiveUrlChecker(request()->url()));
+        $activeUrlChecker = config('filament-menu.active-url-checker', ActiveUrlChecker::class);
+
+        return new Navigation(new $activeUrlChecker(request()->url()));
     }
 }
