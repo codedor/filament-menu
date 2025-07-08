@@ -29,29 +29,36 @@
                 @svg('heroicon-o-ellipsis-vertical', 'text-gray-400 w-5 h-5')
             </button>
 
-            <span class="py-2 px-4">
-                <span>{{ $item->working_title }}</span>
+            <span class="py-2 px-4 flex items-center gap-4">
+                <div class="flex flex-col">
+                    <span>{{ $item->working_title }}</span>
+                    @if ($item->type)
+                        <span class="text-sm opacity-50">{{ $item->type::$name }}</span>
+                    @endif
+                </div>
 
-                @foreach($item->getTranslations('online') as $locale => $online)
-                    <span
-                        @style([
-                            match ($item->getTranslation('online', $locale)) {
-                                false, null, '' => \Filament\Support\get_color_css_variables('danger', shades: [500, 700]),
-                                default => \Filament\Support\get_color_css_variables('success', shades: [500, 700]),
-                            }
-                        ])
-                        class="
-                            text-custom-700 bg-custom-500/10 dark:text-custom-500
-                            rtl:space-x-reverse min-h-6 px-2 py-0.5 text-sm font-medium tracking-tight
-                            inline-flex items-center justify-center space-x-1
-                            rounded-xl whitespace-nowrap
-                        "
-                    >
-                        {{ $locale }}
-                    </span>
-                @endforeach
+                <div>
+                    @foreach($item->onlineValues() as $locale => $online)
+                        <span
+                            @style([
+                                match ($online) {
+                                    false, null, '' => \Filament\Support\get_color_css_variables('danger', shades: [500, 700]),
+                                    default => \Filament\Support\get_color_css_variables('success', shades: [500, 700]),
+                                }
+                            ])
+                            class="
+                                text-custom-700 bg-custom-500/10 dark:text-custom-500
+                                rtl:space-x-reverse min-h-6 px-2 py-0.5 text-sm font-medium tracking-tight
+                                inline-flex items-center justify-center space-x-1
+                                rounded-xl whitespace-nowrap
+                            "
+                        >
+                            {{ $locale }}
+                        </span>
+                    @endforeach
+                </div>
 
-                @if(count($item->children) > 0)
+                @if (count($item->children) > 0)
                     <button
                         type="button"
                         x-on:click="open = !open"
