@@ -80,7 +80,7 @@
             'menu-item--buttons absolute right-3 flex items-center',
             'dark:border-gray-600 dark:divide-gray-600' => config('filament.dark_mode'),
         ])>
-            <x-filament-actions::actions :actions="[
+            <x-filament::actions :actions="[
                 ($this->editAction)(['menuItem' => $item->id]),
                 ($this->deleteAction)(['menuItem' => $item->id]),
             ]" />
