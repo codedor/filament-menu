@@ -1,24 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@source '../views/**';
 
-@layer components {
-  .menu-item {
-    margin-bottom: 8px;
-  }
+@utility menu-item {
+  margin-bottom: 8px;
+}
 
-  .menu-item--buttons {
-    top: 50%;
-    transform: translateY(-50%);
-  }
+@utility menu-item--buttons {
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-  .menu-child-list {
-    position: relative;
-    margin-top: 0 !important;
-    padding-left: 41px;
-  }
+@utility menu-child-list {
+  position: relative;
+  margin-top: 0 !important;
+  padding-left: 41px;
 
-  .menu-child-list::after {
+  &::after {
     @apply bg-gray-200;
 
     content: '';

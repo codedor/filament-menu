@@ -6,9 +6,7 @@ use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
 use Codedor\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns;
 use Filament\Tables\Table;
 
@@ -16,12 +14,12 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bars-3';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-bars-3';
 
-    public static function form(Form $form): Form
+    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
-        return $form->schema([
-            Components\Grid::make(1)->schema([
+        return $schema->components([
+            \Filament\Schemas\Components\Grid::make(1)->schema([
                 Components\TextInput::make('working_title')
                     ->autofocus()
                     ->unique(ignorable: fn ($record) => $record)
@@ -60,11 +58,11 @@ class MenuResource extends Resource
                 Columns\TextColumn::make('depth'),
             ])
             ->actions([
-                Tables\Actions\Action::make('build-menu')
+                \Filament\Actions\Action::make('build-menu')
                     ->icon('heroicon-o-document-text')
                     ->url(fn (Menu $record): string => "menus/{$record->id}/builder"),
 
-                Tables\Actions\EditAction::make(),
+                \Filament\Actions\EditAction::make(),
             ]);
     }
 

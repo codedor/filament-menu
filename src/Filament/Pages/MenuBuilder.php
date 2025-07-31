@@ -6,10 +6,8 @@ use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns;
 use Filament\Resources\Pages\Page;
@@ -25,7 +23,7 @@ class MenuBuilder extends Page
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static string $view = 'filament-menu::filament.pages.menu-builder';
+    protected string $view = 'filament-menu::filament.pages.menu-builder';
 
     protected $listeners = [
         'refresh' => '$refresh',
@@ -70,7 +68,7 @@ class MenuBuilder extends Page
                     ...$menuItem->data ?? [],
                 ];
             })
-            ->form(fn () => [
+            ->schema(fn () => [
                 TextInput::make('working_title')
                     ->required()
                     ->maxLength(255),
@@ -80,9 +78,9 @@ class MenuBuilder extends Page
                     ->required()
                     ->reactive(),
 
-                Grid::make(1)
-                    ->hidden(fn (Get $get) => empty($get('type')))
-                    ->schema(fn (Get $get) => $get('type') ? $get('type')::make()->schema() : []),
+                \Filament\Schemas\Components\Grid::make(1)
+                    ->hidden(fn (\Filament\Schemas\Components\Utilities\Get $get) => empty($get('type')))
+                    ->schema(fn (\Filament\Schemas\Components\Utilities\Get $get) => $get('type') ? $get('type')::make()->schema() : []),
             ])
             ->action(function (array $arguments, array $data) {
                 $menuItem = MenuItem::updateOrCreate([
