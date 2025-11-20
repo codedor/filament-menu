@@ -5,14 +5,10 @@ namespace Codedor\FilamentMenu\Filament\Pages;
 use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Codedor\FilamentMenu\Models\Menu;
 use Codedor\FilamentMenu\Models\MenuItem;
-use Codedor\LinkPicker\Filament\LinkPickerInput;
-use Codedor\LocaleCollection\Facades\LocaleCollection;
-use Codedor\LocaleCollection\Locale;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
-use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns;
@@ -24,7 +20,6 @@ use Illuminate\Support\Str;
 class MenuBuilder extends Page
 {
     use Concerns\InteractsWithRecord;
-    use HasTranslations;
 
     protected static string $resource = MenuResource::class;
 
@@ -60,65 +55,46 @@ class MenuBuilder extends Page
 
     public function formAction(): Action
     {
+        $types = collect(config('filament-menu.navigation-elements', []))
+            ->mapWithKeys(fn (string $element) => [$element => $element::name()]);
+
         return Action::make('edit')
-            ->fillForm(function (array $arguments, array $data) {
-                $menuItem = isset($arguments['menuItem']) ? MenuItem::find($arguments['menuItem']) : new MenuItem;
+            ->fillForm(function (array $arguments) {
+                $menuItem = isset($arguments['menuItem'])
+                    ? MenuItem::find($arguments['menuItem'])
+                    : new MenuItem;
 
                 return [
                     'working_title' => $menuItem->working_title,
-                    'link' => is_string($menuItem->link)
-                        ? json_decode($menuItem->link ?? '[]', true)
-                        : $menuItem->link,
-                    ...LocaleCollection::mapWithKeys(function (Locale $locale) use ($menuItem) {
-                        $locale = $locale->locale();
-
-                        $menuItem->setLocale($locale);
-
-                        return [
-                            $locale => [
-                                'label' => $menuItem->label,
-                                'translated_link' => $menuItem->translated_link,
-                                'online' => $menuItem->online,
-                            ],
-                        ];
-                    }),
+                    'type' => $menuItem->type,
+                    ...$menuItem->data ?? [],
                 ];
             })
-            ->form([
-                TranslatableTabs::make()
-                    ->columnSpan(['lg' => 2])
-                    ->defaultFields([
-                        TextInput::make('working_title')
-                            ->label(__('filament-menu::admin.working title'))
-                            ->required()
-                            ->maxLength(255),
+            ->form(fn () => [
+                TextInput::make('working_title')
+                    ->label(__('filament-menu::admin.working title'))
+                    ->required()
+                    ->maxLength(255),
 
-                        LinkPickerInput::make('link')
-                            ->label(__('filament-menu::admin.link')),
-                    ])
-                    ->translatableFields(fn () => [
-                        TextInput::make('label')
-                            ->label(__('filament-menu::admin.label'))
-                            ->required(fn (Get $get) => $get('online')),
+                Select::make('type')
+                    ->label(__('filament-menu::admin.type'))
+                    ->options($types)
+                    ->required()
+                    ->reactive(),
 
-                        LinkPickerInput::make('translated_link')
-                            ->label(__('filament-menu::admin.link'))
-                            ->helperText(__('filament-menu::admin.override translation link')),
-
-                        Toggle::make('online')
-                            ->label(__('filament-menu::admin.online'))
-                            ->label('Online'),
-                    ]),
+                Grid::make(1)
+                    ->hidden(fn (Get $get) => empty($get('type')))
+                    ->schema(fn (Get $get) => $get('type') ? $get('type')::make()->schema() : []),
             ])
             ->action(function (array $arguments, array $data) {
-                $data['menu_id'] = $this->record->id;
-
-                $menuItem = MenuItem::updateOrCreate(
-                    [
-                        'id' => $arguments['menuItem'] ?? null,
-                    ],
-                    $this->mutateData($data),
-                );
+                $menuItem = MenuItem::updateOrCreate([
+                    'id' => $arguments['menuItem'] ?? null,
+                    'menu_id' => $this->record->id,
+                ], [
+                    'working_title' => $data['working_title'],
+                    'type' => $data['type'],
+                    'data' => collect($data)->except('type', 'working_title'),
+                ]);
 
                 $title = $menuItem->wasRecentlyCreated
                     ? __('filament-menu::menu-builder.successfully created')
@@ -142,13 +118,12 @@ class MenuBuilder extends Page
             ->color('danger')
             ->link()
             ->requiresConfirmation()
-            ->action(function (array $arguments, array $data) {
+            ->action(function (array $arguments) {
                 $menuItem = MenuItem::findOrFail($arguments['menuItem'] ?? null);
 
-                MenuItem::where('parent_id', $menuItem->id)
-                    ->update([
-                        'parent_id' => null,
-                    ]);
+                MenuItem::where('parent_id', $menuItem->id)->update([
+                    'parent_id' => null,
+                ]);
 
                 $menuItem->delete();
 
@@ -165,10 +140,9 @@ class MenuBuilder extends Page
     {
         $itemIds = collect($items)->map(fn ($item) => Str::afterLast($item, '.'));
 
-        MenuItem::whereIn('id', $itemIds)
-            ->update([
-                'parent_id' => ($statePath === 'data.items') ? null : Str::afterLast($statePath, '.'),
-            ]);
+        MenuItem::whereIn('id', $itemIds)->update([
+            'parent_id' => ($statePath === 'data.items') ? null : Str::afterLast($statePath, '.'),
+        ]);
 
         MenuItem::setNewOrder($itemIds, 1000);
 

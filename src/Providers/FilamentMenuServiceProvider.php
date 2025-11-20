@@ -19,9 +19,11 @@ class FilamentMenuServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 '2023_05_12_083428_create_menus_table',
                 '2023_05_12_083501_create_menu_items_table',
+                '2024_06_06_083501_add_type_to_menu_items_table',
             ])
             ->hasConfigFile()
             ->runsMigrations()
+            ->hasConfigFile()
             ->hasViews($this->packageName())
             ->hasTranslations();
     }

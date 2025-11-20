@@ -2,13 +2,11 @@
 
 namespace Codedor\FilamentMenu\Models;
 
-use Codedor\OnlineScope\Models\Traits\HasOnlineScope;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\HtmlString;
 use Spatie\EloquentSortable\SortableTrait;
-use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $working_title
@@ -21,8 +19,6 @@ use Spatie\Translatable\HasTranslations;
  */
 class MenuItem extends Model
 {
-    use HasOnlineScope;
-    use HasTranslations;
     use SortableTrait;
 
     protected $fillable = [
@@ -30,10 +26,8 @@ class MenuItem extends Model
         'parent_id',
         'sort_order',
         'working_title',
-        'link',
-        'label',
-        'translated_link',
-        'online',
+        'type',
+        'data',
     ];
 
     public $sortable = [
@@ -41,19 +35,12 @@ class MenuItem extends Model
         'sort_when_creating' => true,
     ];
 
-    protected $translatable = [
-        'label',
-        'translated_link',
-        'online',
-    ];
-
     public $with = [
         'children',
     ];
 
-    public $casts = [
-        'link' => 'json',
-        'online' => 'boolean',
+    protected $casts = [
+        'data' => 'array',
     ];
 
     public function menu(): BelongsTo
@@ -72,16 +59,16 @@ class MenuItem extends Model
             ->orderBy('sort_order');
     }
 
-    public function getRouteAttribute(): HtmlString|string|null
+    public function type(): Attribute
     {
-        try {
-            if (! empty($this->translated_link)) {
-                return lroute($this->translated_link) ?? '#';
-            }
+        return Attribute::make(
+            get: fn (?string $value) => config("filament-menu.navigation-elements.{$value}"),
+            set: fn (?string $value) => array_search($value, config('filament-menu.navigation-elements')),
+        );
+    }
 
-            return lroute($this->link) ?? '#';
-        } catch (\Throwable $e) {
-            return '#';
-        }
+    public function onlineValues(): array
+    {
+        return (new $this->type)->locales($this->data);
     }
 }

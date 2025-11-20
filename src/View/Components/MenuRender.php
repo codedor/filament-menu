@@ -18,7 +18,7 @@ class MenuRender extends Component
     public function render(): View
     {
         return view($this->view, [
-            'navigation' => MenuCollection::getTree($this->identifier),
+            'navigation' => MenuCollection::getTree($this->identifier)[0]['children'] ?? [],
         ]);
     }
 }
