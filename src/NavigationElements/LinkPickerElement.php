@@ -42,10 +42,12 @@ class LinkPickerElement extends NavigationElement
                 ])
                 ->translatableFields(fn () => [
                     TextInput::make('label')
+                        ->label(__('filament-menu::admin.label'))
                         ->required(fn (Get $get) => $get('online')),
 
                     LinkPickerInput::make('translated_link')
-                        ->helperText('If you want to override the link for this translation, you can do so here.'),
+                        ->label(__('filament-menu::admin.translated link'))
+                        ->helperText(__('filament-menu::admin.override translation link')),
 
                     Checkbox::make('online'), // TODO: Toggle doesn't work on create ?
                 ]),

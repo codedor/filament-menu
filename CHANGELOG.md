@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v2.1.0 - 2025-11-20
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/codedor/filament-menu/pull/29
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/codedor/filament-menu/pull/30
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/codedor/filament-menu/pull/31
+* Make it possible to translate filament resource by @jyrkidn in https://github.com/codedor/filament-menu/pull/24
+
+**Full Changelog**: https://github.com/codedor/filament-menu/compare/v2.0.0...v2.1.0
+
 ## v2.0.0 - 2025-07-08
 
 ### What's Changed

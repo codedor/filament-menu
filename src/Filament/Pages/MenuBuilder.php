@@ -70,10 +70,12 @@ class MenuBuilder extends Page
             })
             ->schema(fn () => [
                 TextInput::make('working_title')
+                    ->label(__('filament-menu::admin.working title'))
                     ->required()
                     ->maxLength(255),
 
                 Select::make('type')
+                    ->label(__('filament-menu::admin.type'))
                     ->options($types)
                     ->required()
                     ->reactive(),

@@ -21,19 +21,23 @@ class MenuResource extends Resource
         return $schema->components([
             \Filament\Schemas\Components\Grid::make(1)->schema([
                 Components\TextInput::make('working_title')
+                    ->label(__('filament-menu::admin.working title'))
                     ->autofocus()
                     ->unique(ignorable: fn ($record) => $record)
                     ->required(),
 
                 Components\TextInput::make('identifier')
+                    ->label(__('filament-menu::admin.identifier'))
                     ->unique(ignorable: fn ($record) => $record)
                     ->hidden(fn () => ! is_superadmin())
                     ->required(),
 
                 Components\Textarea::make('description')
+                    ->label(__('filament-menu::admin.description'))
                     ->rows(3),
 
                 Components\TextInput::make('depth')
+                    ->label(__('filament-menu::admin.depth'))
                     ->hidden(fn () => ! is_superadmin())
                     ->default(1)
                     ->minValue(1)
@@ -47,18 +51,23 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Columns\TextColumn::make('working_title'),
+                Columns\TextColumn::make('working_title')
+                    ->label(__('filament-menu::admin.working title')),
 
                 Columns\TextColumn::make('identifier')
+                    ->label(__('filament-menu::admin.identifier'))
                     ->hidden(fn () => ! is_superadmin()),
 
                 Columns\TextColumn::make('description')
+                    ->label(__('filament-menu::admin.description'))
                     ->hidden(fn () => is_superadmin()),
 
-                Columns\TextColumn::make('depth'),
+                Columns\TextColumn::make('depth')
+                    ->label(__('filament-menu::admin.depth')),
             ])
             ->actions([
                 \Filament\Actions\Action::make('build-menu')
+                    ->label(__('filament-menu::admin.build menu'))
                     ->icon('heroicon-o-document-text')
                     ->url(fn (Menu $record): string => "menus/{$record->id}/builder"),
 
