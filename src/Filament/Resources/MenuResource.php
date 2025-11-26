@@ -19,31 +19,33 @@ class MenuResource extends Resource
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema->components([
-            \Filament\Schemas\Components\Grid::make(1)->schema([
-                Components\TextInput::make('working_title')
-                    ->label(__('filament-menu::admin.working title'))
-                    ->autofocus()
-                    ->unique(ignorable: fn ($record) => $record)
-                    ->required(),
+            \Filament\Schemas\Components\Grid::make(1)
+                ->schema([
+                    Components\TextInput::make('working_title')
+                        ->label(__('filament-menu::admin.working title'))
+                        ->autofocus()
+                        ->unique(ignorable: fn ($record) => $record)
+                        ->required(),
 
-                Components\TextInput::make('identifier')
-                    ->label(__('filament-menu::admin.identifier'))
-                    ->unique(ignorable: fn ($record) => $record)
-                    ->hidden(fn () => ! is_superadmin())
-                    ->required(),
+                    Components\TextInput::make('identifier')
+                        ->label(__('filament-menu::admin.identifier'))
+                        ->unique(ignorable: fn ($record) => $record)
+                        ->hidden(fn () => ! is_superadmin())
+                        ->required(),
 
-                Components\Textarea::make('description')
-                    ->label(__('filament-menu::admin.description'))
-                    ->rows(3),
+                    Components\Textarea::make('description')
+                        ->label(__('filament-menu::admin.description'))
+                        ->rows(3),
 
-                Components\TextInput::make('depth')
-                    ->label(__('filament-menu::admin.depth'))
-                    ->hidden(fn () => ! is_superadmin())
-                    ->default(1)
-                    ->minValue(1)
-                    ->type('number')
-                    ->required(),
-            ]),
+                    Components\TextInput::make('depth')
+                        ->label(__('filament-menu::admin.depth'))
+                        ->hidden(fn () => ! is_superadmin())
+                        ->default(1)
+                        ->minValue(1)
+                        ->type('number')
+                        ->required(),
+                ])
+                ->columnSpanFull(),
         ]);
     }
 
