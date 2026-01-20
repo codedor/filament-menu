@@ -1,10 +1,7 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Pages;
+namespace Wotz\FilamentMenu\Filament\Pages;
 
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
-use Codedor\FilamentMenu\Models\Menu;
-use Codedor\FilamentMenu\Models\MenuItem;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -14,6 +11,9 @@ use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
+use Wotz\FilamentMenu\Models\Menu;
+use Wotz\FilamentMenu\Models\MenuItem;
 
 class MenuBuilder extends Page
 {

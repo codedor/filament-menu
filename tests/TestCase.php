@@ -1,10 +1,10 @@
 <?php
 
-namespace Codedor\FilamentMenu\Tests;
+namespace Wotz\FilamentMenu\Tests;
 
-use Codedor\FilamentMenu\Providers\FilamentMenuServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Wotz\FilamentMenu\Providers\FilamentMenuServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Codedor\\FilamentMenu\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Wotz\\FilamentMenu\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 

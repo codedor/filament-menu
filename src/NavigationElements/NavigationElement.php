@@ -1,11 +1,11 @@
 <?php
 
-namespace Codedor\FilamentMenu\NavigationElements;
+namespace Wotz\FilamentMenu\NavigationElements;
 
-use Codedor\LocaleCollection\Facades\LocaleCollection;
-use Codedor\LocaleCollection\Locale;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
+use Wotz\LocaleCollection\Facades\LocaleCollection;
+use Wotz\LocaleCollection\Locale;
 
 abstract class NavigationElement
 {
@@ -18,6 +18,11 @@ abstract class NavigationElement
     public function link(array $data): string|HtmlString
     {
         return '#';
+    }
+
+    public function title(array $data): string
+    {
+        return $data[app()->getLocale()]['label'] ?? '';
     }
 
     public function shown(array $data): bool

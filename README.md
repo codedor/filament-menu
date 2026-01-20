@@ -5,7 +5,7 @@
 You can install the package via composer:
 
 ```bash
-composer require codedor/filament-menu
+composer require wotz/filament-menu
 ```
 
 You can publish and run the migrations with:
@@ -39,7 +39,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Security Vulnerabilities
 
-If you discover any security-related issues, please email info@codedor.be instead of using the issue tracker.
+If you discover any security-related issues, please email info@whoownsthezebra.be instead of using the issue tracker.
 
 ## License
 

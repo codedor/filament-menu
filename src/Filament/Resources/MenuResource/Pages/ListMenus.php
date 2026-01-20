@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
+namespace Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
 
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Resources\Pages\ListRecords;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
 
 class ListMenus extends ListRecords
 {

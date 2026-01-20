@@ -1,6 +1,6 @@
 <?php
 
-use Codedor\FilamentMenu\NavigationElements;
+use Wotz\FilamentMenu\NavigationElements;
 
 return [
     'navigation-elements' => [

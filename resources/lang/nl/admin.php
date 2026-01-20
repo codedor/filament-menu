@@ -10,4 +10,5 @@ return [
     'label' => 'Label',
     'override translation link' => 'Als u de link voor deze vertaling wilt overschrijven, kunt u dat hier doen.',
     'online' => 'Online',
+    'type' => 'Type',
 ];

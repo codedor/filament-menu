@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FilamentMenu\Models;
+namespace Wotz\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;

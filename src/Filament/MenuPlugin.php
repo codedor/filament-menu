@@ -1,13 +1,13 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament;
+namespace Wotz\FilamentMenu\Filament;
 
-use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
+use Wotz\FilamentMenu\Filament\Pages\MenuBuilder;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
 
 class MenuPlugin implements Plugin
 {
