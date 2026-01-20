@@ -2,13 +2,13 @@
 
 namespace Wotz\FilamentMenu\NavigationElements;
 
-use Wotz\LinkPicker\Filament\LinkPickerInput;
-use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
+use Wotz\LinkPicker\Filament\LinkPickerInput;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class LinkPickerElement extends NavigationElement
 {

@@ -2,13 +2,13 @@
 
 namespace Wotz\FilamentMenu;
 
-use Wotz\FilamentMenu\Models\Menu;
-use Wotz\FilamentMenu\Models\MenuItem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Navigation\Helpers\ActiveUrlChecker;
 use Spatie\Navigation\Navigation;
 use Spatie\Navigation\Section;
+use Wotz\FilamentMenu\Models\Menu;
+use Wotz\FilamentMenu\Models\MenuItem;
 
 class MenuCollection extends Collection
 {

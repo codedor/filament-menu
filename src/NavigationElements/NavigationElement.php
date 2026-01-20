@@ -2,10 +2,10 @@
 
 namespace Wotz\FilamentMenu\NavigationElements;
 
-use Wotz\LocaleCollection\Facades\LocaleCollection;
-use Wotz\LocaleCollection\Locale;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
+use Wotz\LocaleCollection\Facades\LocaleCollection;
+use Wotz\LocaleCollection\Locale;
 
 abstract class NavigationElement
 {

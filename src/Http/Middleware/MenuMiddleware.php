@@ -3,9 +3,9 @@
 namespace Wotz\FilamentMenu\Http\Middleware;
 
 use Closure;
-use Wotz\FilamentMenu\Facades\MenuCollection;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wotz\FilamentMenu\Facades\MenuCollection;
 
 class MenuMiddleware
 {

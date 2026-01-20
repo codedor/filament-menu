@@ -2,13 +2,13 @@
 
 namespace Wotz\FilamentMenu\Filament\Resources;
 
-use Wotz\FilamentMenu\Filament\Pages\MenuBuilder;
-use Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
-use Wotz\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns;
 use Filament\Tables\Table;
+use Wotz\FilamentMenu\Filament\Pages\MenuBuilder;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
+use Wotz\FilamentMenu\Models\Menu;
 
 class MenuResource extends Resource
 {

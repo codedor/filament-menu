@@ -2,9 +2,9 @@
 
 namespace Wotz\FilamentMenu\Tests;
 
-use Wotz\FilamentMenu\Providers\FilamentMenuServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Wotz\FilamentMenu\Providers\FilamentMenuServiceProvider;
 
 class TestCase extends Orchestra
 {
