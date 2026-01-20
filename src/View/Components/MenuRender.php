@@ -1,8 +1,8 @@
 <?php
 
-namespace Codedor\FilamentMenu\View\Components;
+namespace Wotz\FilamentMenu\View\Components;
 
-use Codedor\FilamentMenu\Facades\MenuCollection;
+use Wotz\FilamentMenu\Facades\MenuCollection;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 

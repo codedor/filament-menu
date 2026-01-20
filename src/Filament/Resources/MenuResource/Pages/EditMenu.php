@@ -1,8 +1,8 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
+namespace Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
 
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Resources\Pages\EditRecord;
 
 class EditMenu extends EditRecord

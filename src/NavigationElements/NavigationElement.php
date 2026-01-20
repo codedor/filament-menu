@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FilamentMenu\NavigationElements;
+namespace Wotz\FilamentMenu\NavigationElements;
 
-use Codedor\LocaleCollection\Facades\LocaleCollection;
-use Codedor\LocaleCollection\Locale;
+use Wotz\LocaleCollection\Facades\LocaleCollection;
+use Wotz\LocaleCollection\Locale;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
 

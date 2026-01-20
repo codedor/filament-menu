@@ -1,10 +1,10 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Pages;
+namespace Wotz\FilamentMenu\Filament\Pages;
 
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
-use Codedor\FilamentMenu\Models\Menu;
-use Codedor\FilamentMenu\Models\MenuItem;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
+use Wotz\FilamentMenu\Models\Menu;
+use Wotz\FilamentMenu\Models\MenuItem;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;

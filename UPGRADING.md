@@ -1,5 +1,10 @@
 # Upgrading
 
+## From v2 to v3
+
+- Install `wotz/filament-menu` instead of `codedor/filament-menu`
+- Replace all occurrences of `Codedor\FilamentMenu` namespace with new `Wotz\FilamentMenu` namespace
+
 ## From v1 to v2
 
 This major release introduces a completely refactored menu system with a more flexible and extensible architecture. The main change is the introduction of **Navigation Elements** - a new way to handle different types of menu items that allows for better customization and future extensibility.
@@ -70,7 +75,7 @@ Menu item data is now stored as:
 ### Upgrade Path
 
 1. **Backup your database** before upgrading
-2. Run `composer update codedor/filament-menu`
+2. Run `composer update wotz/filament-menu`
 3. Run `php artisan migrate`
 4. Clear caches: `php artisan cache:clear`
 5. Check the blade components in your project, they have to be updated to use the new navigation element system

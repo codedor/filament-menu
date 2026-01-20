@@ -1,10 +1,10 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Resources;
+namespace Wotz\FilamentMenu\Filament\Resources;
 
-use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
-use Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
-use Codedor\FilamentMenu\Models\Menu;
+use Wotz\FilamentMenu\Filament\Pages\MenuBuilder;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
+use Wotz\FilamentMenu\Models\Menu;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns;

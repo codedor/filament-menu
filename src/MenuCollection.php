@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FilamentMenu;
+namespace Wotz\FilamentMenu;
 
-use Codedor\FilamentMenu\Models\Menu;
-use Codedor\FilamentMenu\Models\MenuItem;
+use Wotz\FilamentMenu\Models\Menu;
+use Wotz\FilamentMenu\Models\MenuItem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Navigation\Helpers\ActiveUrlChecker;

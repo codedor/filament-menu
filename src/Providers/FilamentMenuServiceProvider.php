@@ -1,8 +1,8 @@
 <?php
 
-namespace Codedor\FilamentMenu\Providers;
+namespace Wotz\FilamentMenu\Providers;
 
-use Codedor\FilamentMenu\View\Components;
+use Wotz\FilamentMenu\View\Components;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
