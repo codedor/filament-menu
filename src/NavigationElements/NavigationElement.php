@@ -47,4 +47,3 @@ abstract class NavigationElement
         return static::$name;
     }
 }
-

@@ -84,4 +84,3 @@ class MenuCollection extends Collection
         return new Navigation(new $activeUrlChecker(request()->url()));
     }
 }
-
