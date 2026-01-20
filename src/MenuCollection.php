@@ -60,12 +60,15 @@ class MenuCollection extends Collection
 
     private function addToSection(Section $section, MenuItem $item): void
     {
-        if (! (new $item->type)->shown($item->data)) {
+        $element = new $item->type;
+
+        if (! $element->shown($item->data)) {
             return;
         }
 
         $section->add(
-            url: Str::before((new $item->type)->link($item->data) ?? '#', '"'),
+            title: $element->title($item->data),
+            url: Str::before($element->link($item->data) ?? '#', '"'),
             configure: $this->childrenCallback($item),
             attributes: [
                 'type' => $item->type,
@@ -81,3 +84,4 @@ class MenuCollection extends Collection
         return new Navigation(new $activeUrlChecker(request()->url()));
     }
 }
+

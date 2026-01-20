@@ -20,6 +20,11 @@ abstract class NavigationElement
         return '#';
     }
 
+    public function title(array $data): string
+    {
+        return $data[app()->getLocale()]['label'] ?? '';
+    }
+
     public function shown(array $data): bool
     {
         return $data[app()->getLocale()]['online'] ?? false;
@@ -42,3 +47,4 @@ abstract class NavigationElement
         return static::$name;
     }
 }
+
