@@ -1,14 +1,13 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament;
+namespace Wotz\FilamentMenu\Filament;
 
-use Codedor\FilamentMenu\Filament\Pages\MenuBuilder;
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
+use Wotz\FilamentMenu\Filament\Pages\MenuBuilder;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
 
 class MenuPlugin implements Plugin
 {
@@ -40,7 +39,6 @@ class MenuPlugin implements Plugin
             ]);
 
             FilamentAsset::register([
-                Css::make('filament-menu-stylesheet', __DIR__ . '/../../public/dist/assets/filament-menu.css'),
                 Js::make('filament-menu-script', __DIR__ . '/../../public/dist/assets/plugin.js'),
             ], 'filament-menu');
         }

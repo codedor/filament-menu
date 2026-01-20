@@ -1,11 +1,11 @@
 <?php
 
-namespace Codedor\FilamentMenu\Http\Middleware;
+namespace Wotz\FilamentMenu\Http\Middleware;
 
 use Closure;
-use Codedor\FilamentMenu\Facades\MenuCollection;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wotz\FilamentMenu\Facades\MenuCollection;
 
 class MenuMiddleware
 {

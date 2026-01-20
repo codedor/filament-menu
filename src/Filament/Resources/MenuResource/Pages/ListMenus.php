@@ -1,10 +1,9 @@
 <?php
 
-namespace Codedor\FilamentMenu\Filament\Resources\MenuResource\Pages;
+namespace Wotz\FilamentMenu\Filament\Resources\MenuResource\Pages;
 
-use Codedor\FilamentMenu\Filament\Resources\MenuResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Wotz\FilamentMenu\Filament\Resources\MenuResource;
 
 class ListMenus extends ListRecords
 {
@@ -13,7 +12,7 @@ class ListMenus extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            \Filament\Actions\CreateAction::make(),
         ];
     }
 }

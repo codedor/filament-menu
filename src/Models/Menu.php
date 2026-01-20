@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FilamentMenu\Models;
+namespace Wotz\FilamentMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
