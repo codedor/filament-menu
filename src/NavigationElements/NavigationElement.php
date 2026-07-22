@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Wotz\LocaleCollection\Facades\LocaleCollection;
 use Wotz\LocaleCollection\Locale;
 
+/** @phpstan-consistent-constructor */
 abstract class NavigationElement
 {
     public static string $name;

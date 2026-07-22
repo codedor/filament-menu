@@ -71,7 +71,7 @@ class MenuResource extends Resource
                 Columns\TextColumn::make('depth')
                     ->label(__('filament-menu::admin.depth')),
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('build-menu')
                     ->label(__('filament-menu::admin.build menu'))
                     ->icon('heroicon-o-document-text')

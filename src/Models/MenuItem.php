@@ -16,6 +16,8 @@ use Spatie\EloquentSortable\SortableTrait;
  * @property int $parent_id
  * @property int $menu_id
  * @property bool $online
+ * @property class-string<\Wotz\FilamentMenu\NavigationElements\NavigationElement>|null $type
+ * @property array|null $data
  */
 class MenuItem extends Model
 {
