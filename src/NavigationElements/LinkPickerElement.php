@@ -35,6 +35,7 @@ class LinkPickerElement extends NavigationElement
     public function hasTargetBlank(array $data): bool
     {
         $link = $data[app()->getLocale()]['translated_link'] ?? $data['link'];
+
         return $link['newTab'] ?? false;
     }
 
