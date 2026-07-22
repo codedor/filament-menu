@@ -32,6 +32,13 @@ class LinkPickerElement extends NavigationElement
         return lroute($data[app()->getLocale()]['translated_link'] ?? $data['link'] ?? '') ?? '';
     }
 
+    public function hasTargetBlank(array $data): bool
+    {
+        $link = $data[app()->getLocale()]['translated_link'] ?? $data['link'];
+
+        return $link['newTab'] ?? false;
+    }
+
     public function schema(): array
     {
         return [

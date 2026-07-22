@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Wotz\LocaleCollection\Facades\LocaleCollection;
 use Wotz\LocaleCollection\Locale;
 
+/** @phpstan-consistent-constructor */
 abstract class NavigationElement
 {
     public static string $name;
@@ -18,6 +19,11 @@ abstract class NavigationElement
     public function link(array $data): string|HtmlString
     {
         return '#';
+    }
+
+    public function hasTargetBlank(array $data): bool
+    {
+        return false;
     }
 
     public function title(array $data): string

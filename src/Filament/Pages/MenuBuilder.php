@@ -61,7 +61,7 @@ class MenuBuilder extends Page
         return Action::make('edit')
             ->fillForm(function (array $arguments) {
                 $menuItem = isset($arguments['menuItem'])
-                    ? MenuItem::find($arguments['menuItem'])
+                    ? MenuItem::findOrNew($arguments['menuItem'])
                     : new MenuItem;
 
                 return [
