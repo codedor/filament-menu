@@ -20,6 +20,11 @@ abstract class NavigationElement
         return '#';
     }
 
+    public function hasTargetBlank(array $data): bool
+    {
+        return false;
+    }
+
     public function title(array $data): string
     {
         return $data[app()->getLocale()]['label'] ?? '';

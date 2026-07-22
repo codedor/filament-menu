@@ -73,6 +73,7 @@ class MenuCollection extends Collection
             attributes: [
                 'type' => $item->type,
                 'data' => $item->data,
+                'target' => ($element->hasTargetBlank($item->data) ?? false) ? '_blank' : null,
             ],
         );
     }
