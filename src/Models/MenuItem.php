@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\EloquentSortable\SortableTrait;
+use Wotz\FilamentMenu\NavigationElements\NavigationElement;
 
 /**
  * @property string $working_title
@@ -16,7 +17,7 @@ use Spatie\EloquentSortable\SortableTrait;
  * @property int $parent_id
  * @property int $menu_id
  * @property bool $online
- * @property class-string<\Wotz\FilamentMenu\NavigationElements\NavigationElement>|null $type
+ * @property class-string<NavigationElement>|null $type
  * @property array|null $data
  */
 class MenuItem extends Model
