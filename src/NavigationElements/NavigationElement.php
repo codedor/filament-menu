@@ -28,19 +28,33 @@ abstract class NavigationElement
 
     public function title(array $data): string
     {
-        return $data[app()->getLocale()]['label'] ?? '';
+        return (string) ($this->translated($data, 'label') ?? '');
     }
 
     public function shown(array $data): bool
     {
-        return $data[app()->getLocale()]['online'] ?? false;
+        return (bool) ($this->translated($data, 'online') ?? false);
     }
 
     public function locales(array $data): array
     {
         return LocaleCollection::mapWithKeys(fn (Locale $locale) => [
-            $locale->locale() => $data[$locale->locale()]['online'] ?? false,
+            $locale->locale() => (bool) ($this->translated($data, 'online', $locale->locale()) ?? false),
         ])->toArray();
+    }
+
+    /**
+     * Read a translated value whichever way it was stored.
+     *
+     * TranslatableTabs v3 dehydrates to `$data[$field][$locale]`, v2 to
+     * `$data[$locale][$field]`, and composer.json allows both — so a menu
+     * item written under one of them must stay readable under the other.
+     */
+    protected function translated(array $data, string $field, ?string $locale = null): mixed
+    {
+        $locale ??= app()->getLocale();
+
+        return $data[$field][$locale] ?? $data[$locale][$field] ?? null;
     }
 
     public static function make(): static
